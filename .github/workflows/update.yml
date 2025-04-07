@@ -9,7 +9,7 @@ on:
     workflow_dispatch:
 
 jobs:
-    setup_node:
+    update_cotec_json:
         runs-on: ubuntu-latest
 
         steps:
