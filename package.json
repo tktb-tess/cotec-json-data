@@ -1,0 +1,17 @@
+{
+  "name": "cotec-json-data",
+  "version": "0.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "TOKOTOBA Akane",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "tsx": "npx tsx index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3"
+  }
+}
