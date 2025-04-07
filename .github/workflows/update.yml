@@ -29,7 +29,7 @@ jobs:
                 git config user.name "actions-user"
                 git config user.email "action@github.com"
                 git add .
-                git commit -m "updated parsed-from-conlinguistics-wiki-list.ctc.json"
+                git commit -m "updated Cotec-JSON"
                 git push
 
             
