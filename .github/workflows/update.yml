@@ -29,7 +29,7 @@ jobs:
                 git config user.name "actions-user"
                 git config user.email "action@github.com"
                 git add .
-                git commit -m "updated Cotec-JSON"
+                git commit --allow-empty -m "updated Cotec-JSON"
                 git push
 
             
