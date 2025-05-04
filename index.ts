@@ -12,10 +12,9 @@ import { writeFile } from 'node:fs';
       JSON.stringify(parsed),
       (e) => {
         if (e) {
-            console.error(e);
-            process.exit(1);
-        }
-        else console.log('writing to a file was successful');
+          console.error(e);
+          process.exit(1);
+        } else console.log('writing to a file was successful');
       }
     );
   } catch (e) {

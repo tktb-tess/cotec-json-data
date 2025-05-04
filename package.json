@@ -1,8 +1,8 @@
 {
   "name": "cotec-json-data",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "author": "TOKOTOBA Akane",
   "type": "module",
   "main": "index.ts",
