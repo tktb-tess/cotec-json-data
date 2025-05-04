@@ -25,16 +25,16 @@ jobs:
               run: npm install
 
             # 実行
-            - name: Run tsx
-              run: npm run tsx
+            - name: Run
+              run: npm run exec
 
-            # コミット (actions-user)
-            - name: Commit
+            # コミット, プッシュ (github-actions[bot])
+            - name: Commit & Push
               run: |
-                git config user.name "actions-user"
-                git config user.email "action@github.com"
+                git config user.name "github-actions[bot]"
+                git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
                 git add .
-                git commit --allow-empty -m "updated Cotec-JSON"
+                git commit --allow-empty -m "updated `parsed-from-conlinguistics-wiki-list.ctc.json`"
                 git push
 
             
