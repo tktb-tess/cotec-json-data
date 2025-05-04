@@ -2,7 +2,7 @@ import { fetchCotec } from "./src/fetch";
 import { cotecToJSON } from "./src/parsing";
 import { writeFile } from 'node:fs';
 
-const main = async () => {
+(async () => {
     const ctc = await fetchCotec();
 
     if (ctc instanceof Error) {
@@ -16,9 +16,5 @@ const main = async () => {
         if (e) console.error(e);
         else console.log('writing to a file was successful');
     });
-};
-
-main();
-
-
+})();
 
