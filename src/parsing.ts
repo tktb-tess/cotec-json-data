@@ -296,6 +296,6 @@ export const cotecToJSON = async (raw: string) => {
     contents.push(cotec_one_content);
   }
 
-  console.log('fetching & parsing cotec file is successful');
+  console.log('fetching & parsing cotec file was successful');
   return { metadata, contents };
 };
