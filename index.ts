@@ -1,24 +1,21 @@
 import { fetchCotec } from './src/fetch';
 import { cotecToJSON } from './src/parsing';
-import { writeFile } from 'node:fs';
+import { writeFile } from 'node:fs/promises';
 
-(async () => {
+const main = async () => {
   try {
     const ctc = await fetchCotec();
     const parsed = await cotecToJSON(ctc);
 
-    writeFile(
+    await writeFile(
       'parsed-from-conlinguistics-wiki-list.ctc.json',
-      JSON.stringify(parsed),
-      (e) => {
-        if (e) {
-          console.error(e);
-          process.exit(1);
-        } else console.log('writing to a file was successful');
-      }
+      JSON.stringify(parsed)
     );
+    console.log('writing the file was successful');
   } catch (e) {
     console.error(e);
     process.exit(1);
   }
-})();
+};
+
+main();
