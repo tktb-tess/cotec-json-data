@@ -99,7 +99,7 @@ export const cotecToJSON = async (raw: string) => {
       part: null,
       example: [],
       script: [],
-    } satisfies CotecContent;
+    };
 
     // messier, name, kanji
     if (row[0]) cotec_one_content.messier = row[0];
