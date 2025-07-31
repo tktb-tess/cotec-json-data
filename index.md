@@ -9,7 +9,7 @@
 
 ## 詳細
 
-人工言語リスト 処理用プログラム群からデータ取得したのち、独自定義のJSON形式にパースして `./parsed-from-conlinguistics-wiki-list.ctc.json` に保管されます。
+人工言語リスト 処理用プログラム群からデータ取得したのち、独自定義のJSON形式にパースして [`./parsed-from-conlinguistics-wiki-list.ctc.json`](./parsed-from-conlinguistics-wiki-list.ctc.json) に保管されます。
 
 更新は毎月**2**日UTC0時頃です。（若干遅れる場合あり）
 
