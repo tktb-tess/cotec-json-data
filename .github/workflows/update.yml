@@ -40,6 +40,9 @@ jobs:
                 git commit --allow-empty -m "updated parsed-from-conlinguistics-wiki-list.ctc.json"
                 git push
 
+    deploy-gh-pages:
+      uses: ./.github/workflows/deploy.yml
+
             
         
 
