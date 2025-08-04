@@ -48,6 +48,7 @@ export type CotecMetadata = {
 };
 
 export type CotecContent = {
+  id: string;
   messier?: unknown;
   name: string[];
   kanji: string[];

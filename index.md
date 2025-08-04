@@ -63,6 +63,7 @@ type CotecMetadata = {
 };
 
 type CotecContent = {
+  id: string;
   messier?: unknown;
   name: string[];
   kanji: string[];
