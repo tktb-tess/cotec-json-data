@@ -298,6 +298,7 @@ export const cotecToJSON = async (raw: string) => {
     script = removeDoubling(script.sort());
 
     const id = Buffer.from(`${i}-${lastUpdate}`, 'utf-8').toString('base64');
+    
 
     contents.push({
       id,
