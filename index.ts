@@ -8,7 +8,7 @@ const main = async () => {
     const parsed = await cotecToJSON(ctc);
 
     await writeFile(
-      'conlinguistics-wiki-cotec.json',
+      'conlinguistics-wiki-list-cotec.json',
       JSON.stringify(parsed)
     );
     console.log('writing the file was successful');
