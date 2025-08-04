@@ -42,7 +42,6 @@ const removeDoubling = <T>(arr: T[]) => {
   return [...set.values()];
 };
 
-
 export const cotecToJSON = async (raw: string) => {
   const contents: CotecContent[] = [];
 
@@ -114,8 +113,12 @@ export const cotecToJSON = async (raw: string) => {
 
     // messier, name, kanji
     messier = row[0] || undefined;
-    name = name.concat(row[1].split(';').map((datum) => datum.trim()));
-    kanji = kanji.concat(row[2].split(';').map((datum) => datum.trim()));
+    if (row[1]) {
+      name = name.concat(row[1].split(';').map((datum) => datum.trim()));
+    }
+    if (row[2]) {
+      kanji = kanji.concat(row[2].split(';').map((datum) => datum.trim()));
+    }
 
     // desc
     if (row[3]) {
@@ -141,7 +144,9 @@ export const cotecToJSON = async (raw: string) => {
     }
 
     // creator, period
-    creator = creator.concat(row[4].split(';').map((datum) => datum.trim()));
+    if (row[4]) {
+      creator = creator.concat(row[4].split(';').map((datum) => datum.trim()));
+    }
     period = row[5] || undefined;
 
     // site
@@ -245,7 +250,6 @@ export const cotecToJSON = async (raw: string) => {
     // moyune
     if (row[12]) {
       const parsed = Array.from(row[12].match(/[A-Z]{3}/g) ?? []);
-
       moyune = moyune.concat(parsed.filter((m) => isMoyune(m)));
     }
 
@@ -304,7 +308,7 @@ export const cotecToJSON = async (raw: string) => {
       twitter: twitter.length > 0 ? twitter : undefined,
       dict: dict.length > 0 ? dict : undefined,
       grammar: grammar.length > 0 ? grammar : undefined,
-      world:grammar.length > 0 ? grammar : undefined,
+      world: grammar.length > 0 ? grammar : undefined,
       category: category.length > 0 ? category : undefined,
       moyune: moyune.length > 0 ? moyune : undefined,
       clav3,

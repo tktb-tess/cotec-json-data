@@ -9,7 +9,7 @@
 
 ## 詳細
 
-人工言語リスト 処理用プログラム群からデータ取得したのち、独自定義のJSON形式にパースして [`./conlinguistics-wiki-list-cotec.json`](./conlinguistics-wiki-list-cotec.json) に保管されます。
+人工言語リスト 処理用プログラム群からデータ取得したのち、独自定義のJSON形式にパースして [`./out/conlinguistics-wiki-list-cotec.json`](./out/conlinguistics-wiki-list-cotec.json) に保管されます。
 
 **※[`./parsed-from-conlinguistics-wiki-list.ctc.json`](./parsed-from-conlinguistics-wiki-list.ctc.json) は形式が異なる古いファイルであり、2025/08/02 以降は更新されていません。一応残してありますが、更新はされませんので注意してください。**
 
