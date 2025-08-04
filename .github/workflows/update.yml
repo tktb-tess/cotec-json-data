@@ -8,6 +8,9 @@ on:
     # 手動実行用
     workflow_dispatch:
 
+    push:
+      branches: [main]
+
 jobs:
     update-cotec-json:
         runs-on: ubuntu-latest
@@ -26,7 +29,7 @@ jobs:
 
             # 実行
             - name: Run
-              run: npm run exec
+              run: npm start
 
             # コミット, プッシュ (github-actions[bot])
             - name: Commit & Push

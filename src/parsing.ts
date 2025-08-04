@@ -1,5 +1,5 @@
-import type { CotecContent, CotecMetadata, MoyuneClass } from './cotec';
-import { isMoyune } from './cotec';
+import type { CotecContent, CotecMetadata, MoyuneClass } from './type';
+import { isMoyune } from './type';
 
 /** by ChatGPT */
 const parseCSV = (csvString: string) => {
@@ -37,6 +37,12 @@ const parseCSV = (csvString: string) => {
   return rows;
 };
 
+const removeDoubling = <T>(arr: T[]) => {
+  const set = new Set(arr);
+  return [...set.values()];
+};
+
+
 export const cotecToJSON = async (raw: string) => {
   const contents: CotecContent[] = [];
 
@@ -53,8 +59,8 @@ export const cotecToJSON = async (raw: string) => {
 
   const title = row_meta[1];
   const author = row_meta[2].split(',').map((str) => str.trim());
-  const date_created = row_meta[3];
-  const date_last_updated = row_meta[4];
+  const createdDate = row_meta[3];
+  const lastUpdate = row_meta[4];
   const license = { name: row_meta[5], content: row_meta[6] } as const;
   const advanced = Number.parseInt(row_meta[7]);
 
@@ -69,8 +75,8 @@ export const cotecToJSON = async (raw: string) => {
     datasize,
     title,
     author,
-    date_created,
-    date_last_updated,
+    createdDate,
+    lastUpdate,
     license,
     advanced,
     label,
@@ -81,32 +87,35 @@ export const cotecToJSON = async (raw: string) => {
   for (let i = 3; i < parsed_data.length - 1; i++) {
     const row = parsed_data[i];
 
-    const cotec_one_content: CotecContent = {
-      messier: null,
-      name: [],
-      kanji: [],
-      desc: [],
-      creator: [],
-      period: null,
-      site: [],
-      twitter: [],
-      dict: [],
-      grammar: [],
-      world: [],
-      category: [],
-      moyune: [],
-      clav3: null,
-      part: null,
-      example: [],
-      script: [],
-    };
+    let messier: unknown;
+    let name: string[] = [];
+    let kanji: string[] = [];
+    let desc: string[] = [];
+    let creator: string[] = [];
+    let period: string | undefined;
+    let site: { name?: string; url: string }[] = [];
+    let twitter: string[] = [];
+    let dict: string[] = [];
+    let grammar: string[] = [];
+    let world: string[] = [];
+    let category: { name: string; content?: string }[] = [];
+    let moyune: MoyuneClass[] = [];
+    let clav3:
+      | {
+          dialect: string;
+          language: string;
+          family: string;
+          creator: string;
+        }
+      | undefined;
+    let part: string | undefined;
+    let example: string[] = [];
+    let script: string[] = [];
 
     // messier, name, kanji
-    if (row[0]) cotec_one_content.messier = row[0];
-    if (row[1])
-      cotec_one_content.name = row[1].split(';').map((datum) => datum.trim());
-    if (row[2])
-      cotec_one_content.kanji = row[2].split(';').map((datum) => datum.trim());
+    messier = row[0] || undefined;
+    name = name.concat(row[1].split(';').map((datum) => datum.trim()));
+    kanji = kanji.concat(row[2].split(';').map((datum) => datum.trim()));
 
     // desc
     if (row[3]) {
@@ -116,27 +125,24 @@ export const cotecToJSON = async (raw: string) => {
       const regexurl =
         /(?:https:\/\/web\.archive\.org\/web\/[0-9]+\/)?https?:\/\/[\w.-]+[\w-]+(?:\/[\w?+\-_~=.&@#%]*)*/gu;
 
-      for (const desc of descs) {
-        cotec_one_content.desc.push(desc);
-        const matchurls = desc.match(regexurl);
+      for (const dsc of descs) {
+        desc.push(dsc);
+        const matchurls = dsc.match(regexurl);
 
         if (matchurls) {
           const urlarray = Array.from(matchurls);
 
           urlarray.forEach((url) => {
-            const res = { url, name: null };
-            cotec_one_content.site.push(res);
+            const res = { url };
+            site.push(res);
           });
         }
       }
     }
 
     // creator, period
-    if (row[4])
-      cotec_one_content.creator = row[4]
-        .split(';')
-        .map((datum) => datum.trim());
-    if (row[5]) cotec_one_content.period = row[5];
+    creator = creator.concat(row[4].split(';').map((datum) => datum.trim()));
+    period = row[5] || undefined;
 
     // site
     if (row[6]) {
@@ -148,69 +154,63 @@ export const cotecToJSON = async (raw: string) => {
 
       for (const match of matches) {
         if (match.groups) {
-          const res = match.groups;
-          const { name, url } = res;
-
+          const { name, url } = match.groups;
           if (!url) throw Error('parse error: site.url is empty');
-
-          const s_ = name ? { name, url } : { name: null, url };
-
-          cotec_one_content.site.push(s_);
+          site.push({ name: name || undefined, url });
         }
       }
     }
 
     // 辞書・文法のsiteをdict, grammarにパース
-    if (cotec_one_content.site) {
-      cotec_one_content.site.forEach((elem) => {
-        if (typeof elem !== 'object' || Array.isArray(elem)) return;
-
+    if (site) {
+      site.forEach((elem) => {
         if (elem.name) {
-          if (elem.name.includes('文法'))
-            cotec_one_content.grammar.push(elem.url);
-          if (elem.name.includes('辞書')) cotec_one_content.dict.push(elem.url);
+          if (elem.name.includes('文法')) {
+            grammar.push(elem.url);
+          }
+          if (elem.name.includes('辞書')) {
+            dict.push(elem.url);
+          }
         }
       });
     }
 
     // twitter
-    if (row[7])
-      cotec_one_content.twitter = row[7].split(';').map((s) => s.trim());
+    if (row[7]) {
+      twitter = twitter.concat(row[7].split(';').map((s) => s.trim()));
+    }
 
     // dict
-    if (row[8]) cotec_one_content.dict = row[8].split(';').map((s) => s.trim());
+    if (row[8]) {
+      dict = dict.concat(row[8].split(';').map((s) => s.trim()));
+    }
 
     // grammar
-    if (row[9])
-      cotec_one_content.grammar = row[9].split(';').map((s) => s.trim());
+    if (row[9]) {
+      grammar = grammar.concat(row[9].split(';').map((s) => s.trim()));
+    }
 
     // world
-    if (row[10])
-      cotec_one_content.world = row[10].split(';').map((s) => s.trim());
+    if (row[10]) {
+      world = world.concat(row[10].split(';').map((s) => s.trim()));
+    }
 
     // category
     if (row[11]) {
-      const category_p = row[11].split(';').map((s) => s.trim());
+      const cat_regex = /(?<name>[^:;]+)(?::(?<content>[^;]+))?/gu;
+      const matches = row[11].matchAll(cat_regex);
 
-      const regex = /^(?<name>[^:]+)(?::(?<content>.+))?$/u;
-
-      for (const elem of category_p) {
-        const match = regex.exec(elem);
-
-        if (match && match.groups) {
+      for (const match of matches) {
+        if (match.groups) {
           const { name, content } = match.groups;
 
-          const c_ = content ? { name, content } : { name, content: null };
-
-          cotec_one_content.category.push(c_);
+          category.push({ name, content: content || undefined });
         }
       }
     }
 
     // モユネ分類・CLA v3をmoyune, clav3にパース
-    cotec_one_content.category.forEach((elem) => {
-      if (typeof elem !== 'object' || Array.isArray(elem)) return;
-
+    category.forEach((elem) => {
       switch (elem.name) {
         case 'CLA v3': {
           if (elem.content) {
@@ -220,28 +220,20 @@ export const cotecToJSON = async (raw: string) => {
 
             if (match && match.groups) {
               const { dialect, language, family, creator } = match.groups;
-
-              const clav3 = {
+              clav3 = {
                 dialect,
                 language,
                 family,
                 creator,
-              } as const;
-
-              cotec_one_content.clav3 = clav3;
+              };
             }
           }
           break;
         }
         case 'モユネ分類': {
           if (elem.content) {
-            const m: MoyuneClass[] = [];
             const parsed = Array.from(elem.content.match(/[A-Z]{3}/g) ?? []);
-            parsed.forEach((s) => {
-              if (isMoyune(s)) m.push(s);
-            });
-            cotec_one_content.moyune = m;
-            cotec_one_content.moyune.sort();
+            moyune = moyune.concat(parsed.filter((m) => isMoyune(m)));
           }
           break;
         }
@@ -252,15 +244,9 @@ export const cotecToJSON = async (raw: string) => {
 
     // moyune
     if (row[12]) {
-      const m: MoyuneClass[] = [];
       const parsed = Array.from(row[12].match(/[A-Z]{3}/g) ?? []);
 
-      parsed.forEach((s) => {
-        if (isMoyune(s)) m.push(s);
-      });
-
-      cotec_one_content.moyune = m;
-      cotec_one_content.moyune.sort();
+      moyune = moyune.concat(parsed.filter((m) => isMoyune(m)));
     }
 
     // clav3
@@ -272,28 +258,60 @@ export const cotecToJSON = async (raw: string) => {
       if (match && match.groups) {
         const { dialect, language, family, creator } = match.groups;
 
-        const clav3 = {
+        clav3 = {
           dialect,
           language,
           family,
           creator,
-        } as const;
-
-        cotec_one_content.clav3 = clav3;
+        };
       }
     }
 
     // part
-    if (row[14]) cotec_one_content.part = row[14].trim();
+    part = row[14] || undefined;
 
     // example, script
-    if (row[15])
-      cotec_one_content.example = row[15].split(';').map((s) => s.trim());
+    if (row[15]) {
+      example = example.concat(row[15].split(';').map((s) => s.trim()));
+    }
 
-    if (row[16])
-      cotec_one_content.script = row[16].split(';').map((s) => s.trim());
+    if (row[16]) {
+      script = script.concat(row[16].split(';').map((s) => s.trim()));
+    }
 
-    contents.push(cotec_one_content);
+    name = removeDoubling(name.sort());
+    kanji = removeDoubling(kanji.sort());
+    desc = removeDoubling(desc.sort());
+    creator = removeDoubling(creator.sort());
+    site = removeDoubling(site);
+    twitter = removeDoubling(twitter.sort());
+    dict = removeDoubling(dict.sort());
+    grammar = removeDoubling(grammar.sort());
+    world = removeDoubling(world.sort());
+    category = removeDoubling(category);
+    moyune = removeDoubling(moyune.sort());
+    example = removeDoubling(example.sort());
+    script = removeDoubling(script.sort());
+
+    contents.push({
+      messier,
+      name,
+      kanji,
+      desc,
+      creator,
+      period,
+      site: site.length > 0 ? site : undefined,
+      twitter: twitter.length > 0 ? twitter : undefined,
+      dict: dict.length > 0 ? dict : undefined,
+      grammar: grammar.length > 0 ? grammar : undefined,
+      world:grammar.length > 0 ? grammar : undefined,
+      category: category.length > 0 ? category : undefined,
+      moyune: moyune.length > 0 ? moyune : undefined,
+      clav3,
+      part,
+      example: example.length > 0 ? example : undefined,
+      script: script.length > 0 ? script : undefined,
+    });
   }
 
   console.log('fetching & parsing cotec file was successful');

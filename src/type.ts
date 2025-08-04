@@ -39,8 +39,8 @@ export type CotecMetadata = {
   datasize: [number, number];
   title: string;
   author: string[];
-  date_created: string;
-  date_last_updated: string;
+  createdDate: string;
+  lastUpdate: string;
   license: { name: string; content: string };
   advanced: number;
   label: string[];
@@ -48,28 +48,28 @@ export type CotecMetadata = {
 };
 
 export type CotecContent = {
-  messier: string | null;
+  messier?: unknown;
   name: string[];
   kanji: string[];
   desc: string[];
   creator: string[];
-  period: string | null;
-  site: { name: string | null; url: string }[];
-  twitter: string[];
-  dict: string[];
-  grammar: string[];
-  world: string[];
-  category: { name: string; content: string | null }[];
-  moyune: MoyuneClass[];
-  clav3: {
+  period?: string;
+  site?: { name?: string; url: string }[];
+  twitter?: string[];
+  dict?: string[];
+  grammar?: string[];
+  world?: string[];
+  category?: { name: string; content?: string }[];
+  moyune?: MoyuneClass[];
+  clav3?: {
     dialect: string;
     language: string;
     family: string;
     creator: string;
-  } | null;
-  part: string | null;
-  example: string[];
-  script: string[];
+  };
+  part?: string;
+  example?: string[];
+  script?: string[];
 };
 
 export type Cotec = {
