@@ -297,11 +297,7 @@ export const cotecToJSON = async (raw: string) => {
     example = removeDoubling(example.sort());
     script = removeDoubling(script.sort());
 
-    const id = Buffer.from(`${i}-${lastUpdate}`, 'utf-8').toString('base64');
-    
-
-    contents.push({
-      id,
+    const pre = {
       messier,
       name,
       kanji,
@@ -319,7 +315,16 @@ export const cotecToJSON = async (raw: string) => {
       part,
       example: example.length > 0 ? example : undefined,
       script: script.length > 0 ? script : undefined,
-    });
+    };
+
+    const id = await (async () => {
+      const json = JSON.stringify(pre);
+      const encoded = Buffer.from(json, 'utf8');
+      const hash = await crypto.subtle.digest('SHA-256', encoded);
+      return Buffer.from(hash).toString('base64url');
+    })();
+
+    contents.push({ id, ...pre });
   }
 
   console.log('fetching & parsing cotec file was successful');
