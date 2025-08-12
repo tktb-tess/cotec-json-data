@@ -322,7 +322,7 @@ export const cotecToJSON = async (raw: string) => {
       twitter: twitter.length > 0 ? twitter : undefined,
       dict: dict.length > 0 ? dict : undefined,
       grammar: grammar.length > 0 ? grammar : undefined,
-      world: grammar.length > 0 ? grammar : undefined,
+      world: world.length > 0 ? world : undefined,
       category: category.length > 0 ? category : undefined,
       moyune: moyune.length > 0 ? moyune : undefined,
       clav3,
