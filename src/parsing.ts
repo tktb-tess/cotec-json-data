@@ -283,19 +283,21 @@ export const cotecToJSON = async (raw: string) => {
       script = script.concat(row[16].split(';').map((s) => s.trim()));
     }
 
-    name = removeDoubling(name.sort());
-    kanji = removeDoubling(kanji.sort());
-    desc = removeDoubling(desc.sort());
-    creator = removeDoubling(creator.sort());
+    name = removeDoubling(name);
+    kanji = removeDoubling(kanji);
+    desc = removeDoubling(desc);
+    creator = removeDoubling(creator);
     site = removeDoubling(site);
-    twitter = removeDoubling(twitter.sort());
-    dict = removeDoubling(dict.sort());
-    grammar = removeDoubling(grammar.sort());
-    world = removeDoubling(world.sort());
+    twitter = removeDoubling(twitter);
+    dict = removeDoubling(dict);
+    grammar = removeDoubling(grammar);
+    world = removeDoubling(world);
     category = removeDoubling(category);
-    moyune = removeDoubling(moyune.sort());
-    example = removeDoubling(example.sort());
-    script = removeDoubling(script.sort());
+    moyune = removeDoubling(moyune);
+    example = removeDoubling(example);
+    script = removeDoubling(script);
+
+    
 
     const pre = {
       messier,
