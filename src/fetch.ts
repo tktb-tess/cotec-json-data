@@ -11,5 +11,6 @@ export const fetchCotec = async () => {
     throw Error(`failed to fetch: ${res.status} ${res.statusText}`);
   }
 
+  console.log('fetching was successful');
   return res.text();
 };

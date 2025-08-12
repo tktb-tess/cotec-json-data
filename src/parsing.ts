@@ -284,21 +284,32 @@ export const cotecToJSON = async (raw: string) => {
       script = script.concat(row[16].split(';').map((s) => s.trim()));
     }
 
+    // ダブリングを消す
     name = removeDoubling(name);
     kanji = removeDoubling(kanji);
     desc = removeDoubling(desc);
     creator = removeDoubling(creator);
-    site = removeDoubling(site);
     twitter = removeDoubling(twitter);
     dict = removeDoubling(dict);
     grammar = removeDoubling(grammar);
     world = removeDoubling(world);
-    category = removeDoubling(category);
     moyune = removeDoubling(moyune);
     example = removeDoubling(example);
     script = removeDoubling(script);
 
+    // 他のプロパティとの重複を削除
+    site = site.filter((s) => {
+      const sName = s.name;
+      if (!sName) return true;
 
+      return !sName.includes('文法') && !sName.includes('辞書');
+    });
+
+    category = category.filter((c) => {
+      const cName = c.name;
+
+      return !cName.includes('CLA v3') && !cName.includes('モユネ分類');
+    });
 
     const pre = {
       messier,
@@ -330,6 +341,6 @@ export const cotecToJSON = async (raw: string) => {
     contents.push({ id, ...pre });
   }
 
-  console.log('fetching & parsing cotec file was successful');
+  console.log(contents.length, 'langs and metadata parsed.');
   return { metadata, contents };
 };
