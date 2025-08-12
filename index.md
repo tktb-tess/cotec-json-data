@@ -53,6 +53,7 @@ type CotecMetadata = {
   author: string[];
   createdDate: string;
   lastUpdate: string;
+  jsonLastUpdate: string;
   license: { 
     name: string;
     content: string;
@@ -138,6 +139,7 @@ export type Cotec = {
   ],
   "createdDate": "2024-03-09T00:00:00.000Z",
   "lastUpdate": "2025-08-01T02:33:12.782Z",
+  "jsonLastUpdate": "2025-08-12T02:36:24.715Z",
   "license": {
     "name": "CC BY-SA 4.0",
     "content": "© みかぶる (Mikanixonable), かえる (kaeru2193), 人工言語学Wiki上の記事編集者 under CC BY-SA 4.0"

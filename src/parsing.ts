@@ -76,6 +76,7 @@ export const cotecToJSON = async (raw: string) => {
     author,
     createdDate,
     lastUpdate,
+    jsonLastUpdate: new Date().toISOString(),
     license,
     advanced,
     label,
@@ -297,7 +298,7 @@ export const cotecToJSON = async (raw: string) => {
     example = removeDoubling(example);
     script = removeDoubling(script);
 
-    
+
 
     const pre = {
       messier,
