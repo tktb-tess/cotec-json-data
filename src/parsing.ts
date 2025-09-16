@@ -113,6 +113,7 @@ export const cotecToJSON = async (raw: string) => {
     if (row[4]) {
       creator = creator.concat(row[4].split(';').map((datum) => datum.trim()));
     }
+
     period = row[5] || undefined;
 
     // site
@@ -133,18 +134,17 @@ export const cotecToJSON = async (raw: string) => {
     }
 
     // 辞書・文法のsiteをdict, grammarにパース
-    if (site) {
-      site.forEach((elem) => {
-        if (elem.name) {
-          if (elem.name.includes('文法')) {
-            grammar.push(elem.url);
-          }
-          if (elem.name.includes('辞書')) {
-            dict.push(elem.url);
-          }
+
+    site.forEach((elem) => {
+      if (elem.name) {
+        if (elem.name.includes('文法')) {
+          grammar.push(elem.url);
         }
-      });
-    }
+        if (elem.name.includes('辞書')) {
+          dict.push(elem.url);
+        }
+      }
+    });
 
     // twitter
     if (row[7]) {

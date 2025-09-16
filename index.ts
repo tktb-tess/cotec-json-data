@@ -15,7 +15,7 @@ const main = async () => {
     console.log('writing the file was successful');
   } catch (e) {
     console.error(e);
-    return;
+    throw e;
   }
 };
 
