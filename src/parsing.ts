@@ -2,42 +2,6 @@ import type { CotecContent, CotecMetadata, MoyuneClass } from './type';
 import { isMoyune } from './type';
 import { parseCSV } from '@tktb-tess/util-fns';
 
-/** by ChatGPT */
-// const parseCSV = (csvString: string) => {
-//   const rows: string[][] = [];
-//   let row: string[] = [];
-//   let currentField = '';
-//   let is_inside_of_quote = false;
-// 
-//   for (let i = 0; i < csvString.length; i++) {
-//     const char = csvString[i];
-// 
-//     if (char === '"' && (i === 0 || csvString[i - 1] !== '\\')) {
-//       // ダブルクォート（not エスケープ）に入った/出た時にトグル
-//       is_inside_of_quote = !is_inside_of_quote;
-//     } else if (char === ',' && !is_inside_of_quote) {
-//       // クォート内でないコンマ
-//       row.push(currentField.trim()); // フィールドを列配列に追加
-//       currentField = ''; // クリア
-//     } else if (char === '\n' && !is_inside_of_quote) {
-//       // クォート内でない改行
-//       row.push(currentField.trim()); // フィールドを列配列に追加
-//       rows.push(row); // 列配列を2次元配列に追加
-//       row = []; // 列配列, フィールドをクリア
-//       currentField = '';
-//     } else {
-//       // フィールドに文字を追加
-//       currentField += char;
-//     }
-//   }
-// 
-//   // 最後のセルと行を追加
-//   row.push(currentField.trim());
-//   rows.push(row);
-// 
-//   return rows;
-// };
-
 const removeDoubling = <T>(arr: T[]) => {
   const set = new Set(arr);
   return [...set.values()];
