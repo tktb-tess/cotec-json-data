@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: '0 0 2 * *' # 毎月2日
 
+  push:
+    branches: [main]
+
   # 手動実行
   workflow_dispatch:
 
@@ -18,18 +21,27 @@ jobs:
   update-cotec-json:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: 'pnpm'
 
       # 依存関係のインストール
       - name: Install dependencies
-        run: npm ci
+        run: pnpm i
 
       # 実行
       - name: Run
-        run: npm start
+        run: pnpm start
 
       - name: Configure Git
         run: |
@@ -42,4 +54,3 @@ jobs:
           git add .
           git commit --allow-empty -m "updated conlinguistics-wiki-list-cotec.json"
           git push
-  
