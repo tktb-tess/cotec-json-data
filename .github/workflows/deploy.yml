@@ -4,21 +4,23 @@ on:
   # schedule:
   #   - cron: '0 0 2 * *' # 毎月2日
 
-  # push:
-  #   branches: [main]
+  push:
+    branches: [main]
 
   # 手動実行
   workflow_dispatch:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: 'pages'
   cancel-in-progress: true
 
 jobs:
-  update-cotec-json:
+  update-and-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,22 +37,36 @@ jobs:
           node-version: 22
           cache: 'pnpm'
 
-      # 依存関係のインストール
       - name: Install dependencies
         run: pnpm i
 
-      # 実行
-      - name: Run
-        run: pnpm start
+      - name: Update conlinguistics-wiki-list-cotec.json
+        run: pnpm update-json
 
-      - name: Configure Git
+      # use github-actions[bot]
+      - name: Commit & Push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-      # コミット, プッシュ (github-actions[bot])
-      - name: Commit & Push
-        run: |
           git add .
           git commit --allow-empty -m "updated conlinguistics-wiki-list-cotec.json"
           git push
+
+      - name: Build with Astro
+        run: pnpm build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: update-and-build
+    steps:
+      - name: Deploy to Github Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

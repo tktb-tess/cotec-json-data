@@ -7,9 +7,9 @@ const main = async () => {
     const ctc = await fetchCotec();
     const parsed = await cotecToJSON(ctc);
 
-    await mkdir('./out', { recursive: true });
+    await mkdir('./public/out', { recursive: true });
     await writeFile(
-      './out/conlinguistics-wiki-list-cotec.json',
+      './public/out/conlinguistics-wiki-list-cotec.json',
       JSON.stringify(parsed)
     );
     console.log('writing the file was successful');

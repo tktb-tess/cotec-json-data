@@ -6,6 +6,9 @@
   "scripts": {
     "update-json": "tsx mod/index.ts",
     "preinstall": "npx only-allow pnpm",
+    "dev": "astro dev",
+    "build": "astro build",
+    "astro": "astro",
     "delete": "rm -f public/out/conlinguistics-wiki-list-cotec.json"
   },
   "dependencies": {
