@@ -1,18 +1,5 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-
-    "moduleResolution": "bundler",
-    "noEmit": true,
-
-    "strict": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "isolatedModules": true,
-    "noFallthroughCasesInSwitch": true
-  },
-  "include": ["index.ts", "mod"]
+  "extends": "astro/tsconfigs/strict",
+  "include": ["**/*.ts", "**/*.astro", ".astro/types.d.ts"],
+  "exclude": ["dist"]
 }

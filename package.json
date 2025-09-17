@@ -1,18 +1,23 @@
 {
   "name": "cotec-json-data",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "tsx index.ts",
-    "preinstall": "npx only-allow pnpm"
+    "update-json": "tsx mod/index.ts",
+    "preinstall": "npx only-allow pnpm",
+    "delete": "rm -f public/out/conlinguistics-wiki-list-cotec.json"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/vite": "^4.1.13",
     "@tktb-tess/util-fns": "^0.5.1",
     "@types/node": "^24.5.0",
     "@types/papaparse": "^5.3.16",
+    "astro": "^5.13.8",
     "npm-check-updates": "^18.1.1",
     "papaparse": "^5.5.3",
+    "tailwindcss": "^4.1.13",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2"
   },
