@@ -1,5 +1,5 @@
-import { fetchCotec } from './src/fetch';
-import { cotecToJSON } from './src/parsing';
+import { fetchCotec } from './fetch';
+import { cotecToJSON } from './parsing';
 import { mkdir, writeFile } from 'node:fs/promises';
 
 const main = async () => {
