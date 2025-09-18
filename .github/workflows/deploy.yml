@@ -4,8 +4,8 @@ on:
   # schedule:
   #   - cron: '0 0 2 * *' # 毎月2日
 
-  push:
-    branches: [main]
+  # push:
+  #   branches: [main]
 
   # 手動実行
   workflow_dispatch:
