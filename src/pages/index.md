@@ -4,7 +4,7 @@ title: Cotec-JSON data
 ---
 
 
-[戻る](/.)
+[戻る](../)
 
 ## 何
 
@@ -106,29 +106,27 @@ export type Cotec = {
 };
 ```
 
-### 例
+### Examples
 
 #### CotecContent
 
 ```json
-[
-  {
-    "id": "jOEC2TtTSuxM6Bklu1delpwx3FzaT2jMNHt0__el8rw",
-    "name": ["ヴェッセンズラン語"],
-    "kanji": [],
-    "desc": ["古英語からあまり屈折が衰退しなかった娘言語"],
-    "creator": ["Tessyrrhaqt", "テセラクト", "斗琴庭暁響"],
-    "period": "2023",
-    "site": [{ "url": "https://tktb-tess.github.io/" }],
-    "twitter": ["https://twitter.com/Triethylamineq"],
-    "dict": ["https://zpdic.ziphil.com/dictionary/633"],
-    "category": [
-      { "name": "アポステリオリ言語" },
-      { "name": "モユネ分類", "content": "NAT/IMG/CDE/SER/AWL" }
-    ],
-    "moyune": ["NAT", "IMG", "CDE", "SER", "AWL"]
-  }
-]
+{
+  "id": "jOEC2TtTSuxM6Bklu1delpwx3FzaT2jMNHt0__el8rw",
+  "name": ["ヴェッセンズラン語"],
+  "kanji": [],
+  "desc": ["古英語からあまり屈折が衰退しなかった娘言語"],
+  "creator": ["Tessyrrhaqt", "テセラクト", "斗琴庭暁響"],
+  "period": "2023",
+  "site": [{ "url": "https://tktb-tess.github.io/" }],
+  "twitter": ["https://twitter.com/Triethylamineq"],
+  "dict": ["https://zpdic.ziphil.com/dictionary/633"],
+  "category": [
+    { "name": "アポステリオリ言語" },
+    { "name": "モユネ分類", "content": "NAT/IMG/CDE/SER/AWL" }
+  ],
+  "moyune": ["NAT", "IMG", "CDE", "SER", "AWL"]
+}
 ```
 
 #### CotecMetadata
