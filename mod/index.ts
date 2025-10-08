@@ -6,12 +6,15 @@ const main = async () => {
   try {
     const ctc = await fetchCotec();
     const parsed = await cotecToJSON(ctc);
+    const json = JSON.stringify(parsed);
 
     await mkdir('./public/out', { recursive: true });
+    console.log('writing conlinguistics-wiki-list-cotec.json ...');
     await writeFile(
       './public/out/conlinguistics-wiki-list-cotec.json',
-      JSON.stringify(parsed)
+      json
     );
+    
     console.log('writing the file was successful');
   } catch (e) {
     console.error(e);
