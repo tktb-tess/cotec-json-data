@@ -9,16 +9,13 @@ const main = async () => {
     const json = JSON.stringify(parsed);
 
     await mkdir('./public/out', { recursive: true });
-    console.log('writing conlinguistics-wiki-list-cotec.json ...');
-    await writeFile(
-      './public/out/conlinguistics-wiki-list-cotec.json',
-      json
-    );
-    
+    console.log('writing conlinguistics-wiki-list-cotec.json...');
+    await writeFile('./public/out/conlinguistics-wiki-list-cotec.json', json);
+
     console.log('writing the file was successful');
   } catch (e) {
     console.error(e);
-    throw e;
+    return Promise.reject(e);
   }
 };
 

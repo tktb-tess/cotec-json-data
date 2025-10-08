@@ -321,18 +321,9 @@ export const cotecToJSON = async (raw: string) => {
     contents.push({ id, ...pre });
   }
 
-  // ID重複チェック
-  const len = contents.length;
-  for (let i = 0; i < len - 1; ++i) {
-    for (let j = i + 1; j < len; ++j) {
-      const id = contents[i].id;
-      if (id === contents[j].id) {
-        const e = Error('duplicate ID', { cause: [id, i, j] });
-        console.log(e);
-      }
-    }
-  }
+  // 重複を消す
+  const contents_ = removeDoubling(contents);
 
-  console.log(contents.length, 'langs were parsed.');
-  return { metadata, contents };
+  console.log(contents_.length, 'langs were parsed.');
+  return { metadata, contents: contents_ };
 };
