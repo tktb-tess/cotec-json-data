@@ -1,39 +1,49 @@
+import { isDeepStrictEqual } from 'node:util';
 import type { CotecContent, CotecMetadata, MoyuneClass } from './type';
 import { isMoyune } from './type';
 import { parseCSV, getHash } from '@tktb-tess/util-fns';
 
-const removeDoubling = <T>(arr: T[]) => {
-  const set = new Set(arr);
-  return [...set.values()];
+const removeDoubling = <T>(arr: readonly T[]) => {
+  const arr2: T[] = [];
+
+  a: for (let r = 0; r < arr.length; ++r) {
+    for (let l = 0; l < r; ++l) {
+      if (isDeepStrictEqual(arr[l], arr[r])) {
+        // console.log('equal value detected!:', arr[l], arr[r]);
+        continue a;
+      }
+    }
+    arr2.push(arr[r]);
+  }
+
+  return arr2;
 };
 
 export const cotecToJSON = async (raw: string) => {
   const contents: CotecContent[] = [];
 
-  const parsed_data = parseCSV(raw);
-  const row_meta = parsed_data[0];
+  const parsedData = parseCSV(raw);
+  const rowMeta = parsedData[0];
 
   // メタデータ
   const datasize = ((): [number, number] => {
-    const datasize = row_meta[0]
-      .split('x')
-      .map((size) => Number.parseInt(size));
+    const datasize = rowMeta[0].split('x').map((size) => Number.parseInt(size));
     return [datasize[0], datasize[1]];
   })();
 
-  const title = row_meta[1];
-  const author = row_meta[2].split(',').map((str) => str.trim());
-  const createdDate = row_meta[3];
-  const lastUpdate = row_meta[4];
-  const license = { name: row_meta[5], content: row_meta[6] } as const;
-  const advanced = Number.parseInt(row_meta[7]);
+  const title = rowMeta[1];
+  const author = rowMeta[2].split(',').map((str) => str.trim());
+  const createdDate = rowMeta[3];
+  const lastUpdate = rowMeta[4];
+  const license = { name: rowMeta[5], content: rowMeta[6] } as const;
+  const advanced = Number.parseInt(rowMeta[7]);
 
   // if (advanced !== 0) {
   //     /* 何か処理 */;
   // }
 
-  const label = parsed_data[1];
-  const type = parsed_data[2];
+  const label = parsedData[1];
+  const type = parsedData[2];
 
   const metadata: CotecMetadata = {
     datasize,
@@ -48,9 +58,11 @@ export const cotecToJSON = async (raw: string) => {
     type,
   };
 
+  console.log('metadata was parsed');
+
   // messier,name,kanji,desc,creator,period,site,twitter,dict,grammar,world,category,moyune,cla,part,example,script
-  for (let i = 3; i < parsed_data.length - 1; i++) {
-    const row = parsed_data[i];
+  for (let i = 3; i < parsedData.length - 1; i++) {
+    const row = parsedData[i];
 
     let messier: unknown;
     let name: string[] = [];
@@ -249,19 +261,6 @@ export const cotecToJSON = async (raw: string) => {
       script = script.concat(row[16].split(';').map((s) => s.trim()));
     }
 
-    // ダブリングを消す
-    name = removeDoubling(name);
-    kanji = removeDoubling(kanji);
-    desc = removeDoubling(desc);
-    creator = removeDoubling(creator);
-    twitter = removeDoubling(twitter);
-    dict = removeDoubling(dict);
-    grammar = removeDoubling(grammar);
-    world = removeDoubling(world);
-    moyune = removeDoubling(moyune);
-    example = removeDoubling(example);
-    script = removeDoubling(script);
-
     // 他のプロパティとの重複を削除
     site = site.filter((s) => {
       const sName = s.name;
@@ -275,6 +274,21 @@ export const cotecToJSON = async (raw: string) => {
 
       return !cName.includes('CLA v3') && !cName.includes('モユネ分類');
     });
+
+    // ダブリングを消す
+    name = removeDoubling(name);
+    kanji = removeDoubling(kanji);
+    site = removeDoubling(site);
+    desc = removeDoubling(desc);
+    creator = removeDoubling(creator);
+    twitter = removeDoubling(twitter);
+    dict = removeDoubling(dict);
+    grammar = removeDoubling(grammar);
+    category = removeDoubling(category);
+    world = removeDoubling(world);
+    moyune = removeDoubling(moyune);
+    example = removeDoubling(example);
+    script = removeDoubling(script);
 
     const pre = {
       messier,
@@ -305,6 +319,6 @@ export const cotecToJSON = async (raw: string) => {
     contents.push({ id, ...pre });
   }
 
-  console.log(contents.length, 'langs and metadata parsed.');
+  console.log(contents.length, 'langs were parsed.');
   return { metadata, contents };
 };
