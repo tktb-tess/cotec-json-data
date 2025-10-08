@@ -316,7 +316,20 @@ export const cotecToJSON = async (raw: string) => {
       return Buffer.from(hash.buffer).toString('base64url');
     })();
 
+    console.log(id, 'parsed');
+
     contents.push({ id, ...pre });
+  }
+
+  // ID重複チェック
+  const len = contents.length;
+  for (let i = 0; i < len - 1; ++i) {
+    for (let j = i + 1; j < len; ++j) {
+      if (contents[i].id === contents[j].id) {
+        const e = Error('duplicate ID', { cause: { i: JSON.stringify(contents[i]), j: JSON.stringify(contents[j]) } });
+        console.error(e);
+      }
+    }
   }
 
   console.log(contents.length, 'langs were parsed.');
