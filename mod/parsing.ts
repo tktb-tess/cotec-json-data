@@ -1,6 +1,6 @@
 import type { CotecContent, CotecMetadata, MoyuneClass } from './type';
 import { isMoyune } from './type';
-import { parseCSV } from '@tktb-tess/util-fns';
+import { parseCSV, getHash } from '@tktb-tess/util-fns';
 
 const removeDoubling = <T>(arr: T[]) => {
   const set = new Set(arr);
@@ -298,9 +298,8 @@ export const cotecToJSON = async (raw: string) => {
 
     const id = await (async () => {
       const json = JSON.stringify(pre);
-      const encoded = Buffer.from(json, 'utf8');
-      const hash = await crypto.subtle.digest('SHA-256', encoded);
-      return Buffer.from(hash).toString('base64url');
+      const hash = await getHash(json, 'SHA-256');
+      return Buffer.from(hash.buffer).toString('base64url');
     })();
 
     contents.push({ id, ...pre });
