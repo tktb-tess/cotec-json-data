@@ -15,7 +15,7 @@
   "dependencies": {
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.13",
-    "@tktb-tess/util-fns": "^0.5.1",
+    "@tktb-tess/util-fns": "^0.7.0",
     "@types/node": "^24.5.0",
     "@types/papaparse": "^5.3.16",
     "astro": "^5.13.8",

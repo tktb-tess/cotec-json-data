@@ -1,8 +1,8 @@
-name: Update, Build, & Deploy
+name: Update, Build, and Deploy
 
 on:
   schedule:
-    - cron: '0 0 2 * *' # 毎月2日
+    - cron: '0 0 2 * *' # 毎月2日(UTC)
 
   # 手動実行
   workflow_dispatch:
@@ -13,7 +13,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: 'pages'
+  group: pages
   cancel-in-progress: true
 
 jobs:
@@ -27,18 +27,19 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 10
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
+
       - name: Install dependencies
         run: pnpm i --frozen-lockfile
 
       - name: Update conlinguistics-wiki-list-cotec.json
         run: pnpm run update-json
 
-      # use github-actions[bot]
       - name: Commit & Push
         run: |
           git config user.name "github-actions[bot]"
@@ -47,13 +48,13 @@ jobs:
           git commit --allow-empty -m "updated conlinguistics-wiki-list-cotec.json"
           git push
 
-      - name: Build with Astro
+      - name: Build Astro
         run: pnpm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: dist
 
   deploy:
     environment:
