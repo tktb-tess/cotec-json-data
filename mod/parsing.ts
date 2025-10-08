@@ -326,7 +326,7 @@ export const cotecToJSON = async (raw: string) => {
   for (let i = 0; i < len - 1; ++i) {
     for (let j = i + 1; j < len; ++j) {
       if (contents[i].id === contents[j].id) {
-        const e = Error('duplicate ID', { cause: { i: JSON.stringify(contents[i]), j: JSON.stringify(contents[j]) } });
+        const e = Error('duplicate ID', { cause: [i, j] });
         console.error(e);
       }
     }
