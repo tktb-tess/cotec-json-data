@@ -4,7 +4,7 @@ title: Cotec-JSON data
 ---
 
 
-[戻る](../)
+[戻る](/.)
 
 ## 何
 
@@ -18,13 +18,13 @@ title: Cotec-JSON data
 
 **※[`./parsed-from-conlinguistics-wiki-list.ctc.json`](./parsed-from-conlinguistics-wiki-list.ctc.json) は形式が異なる古いファイルであり、2025/08/02 以降は更新されていません。一応残してありますが、更新はされませんので注意してください。**
 
-更新は毎月**2**日UTC0時頃です。（若干遅れる場合あり）
+更新はUTC毎月**2**日0時頃です。（若干遅れる場合あり）
 
 ## 仕様
 
 ### Typescriptでの型
 
-```typescript
+```ts
 type MoyuneClass =
   | 'INT'
   | 'ART'
