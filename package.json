@@ -10,7 +10,7 @@
     "build": "astro build",
     "start": "astro preview",
     "astro": "astro",
-    "delete": "rm -f public/out/conlinguistics-wiki-list-cotec.json"
+    "delete": "rm -f public/out/conlinguistics-wiki-list-cotec.json && rm -f public/out/conlinguistics-wiki-list-cotec-old.json"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.16",
