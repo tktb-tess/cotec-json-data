@@ -321,7 +321,7 @@ export const cotecToJSON = async (raw: string) => {
       return Buffer.from(hash.buffer).toString('base64url');
     })();
 
-    console.log(name[0], 'were parsed');
+    console.log('parsed', name[0]);
 
     contents.push({ id, ...pre });
   }
