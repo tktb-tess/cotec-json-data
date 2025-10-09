@@ -13,6 +13,7 @@ const main = async () => {
     await writeFile('./public/out/conlinguistics-wiki-list-cotec.json', json);
 
     console.log('writing the file was successful');
+    console.log('all tasks were finished');
   } catch (e) {
     console.error(e);
     return Promise.reject(e);
