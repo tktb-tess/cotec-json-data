@@ -6,7 +6,7 @@ const main = async () => {
   try {
     const ctc = await fetchCotec();
     const parsed = await cotecToJSON(ctc);
-    const json = JSON.stringify(parsed);
+    const json = JSON.stringify(parsed, null, 2);
 
     await mkdir('./public/out', { recursive: true });
     console.log('writing conlinguistics-wiki-list-cotec.json...');
