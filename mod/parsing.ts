@@ -20,10 +20,13 @@ const removeDoubling = <T>(arr: readonly T[]) => {
 };
 
 export const cotecToJSON = async (raw: string) => {
+  console.log('start parsing...');
   const contents: CotecContent[] = [];
 
   const parsedData = parseCSV(raw);
   const rowMeta = parsedData[0];
+
+  console.log('parsing metadata...');
 
   // メタデータ
   const datasize = ((): [number, number] => {
@@ -58,7 +61,9 @@ export const cotecToJSON = async (raw: string) => {
     type,
   };
 
-  console.log('metadata was parsed');
+  console.log('successfully parsed metadata');
+
+  console.log('parsing contents...');
 
   // messier,name,kanji,desc,creator,period,site,twitter,dict,grammar,world,category,moyune,cla,part,example,script
   for (let i = 3; i < parsedData.length - 1; i++) {
@@ -316,7 +321,7 @@ export const cotecToJSON = async (raw: string) => {
       return Buffer.from(hash.buffer).toString('base64url');
     })();
 
-    console.log(id, 'parsed');
+    console.log(name[0], 'were parsed');
 
     contents.push({ id, ...pre });
   }
@@ -324,6 +329,7 @@ export const cotecToJSON = async (raw: string) => {
   // 重複を消す
   const contents_ = removeDoubling(contents);
 
-  console.log(contents_.length, 'langs were parsed.');
+  console.log('successfully parsed contents', contents_.length, 'langs');
+  console.log('successfully parsed all');
   return { metadata, contents: contents_ };
 };
