@@ -11,8 +11,8 @@
       "人工言語学Wiki上の記事編集者"
     ],
     "createdDate": "2024-03-09T00:00:00.000Z",
-    "lastUpdate": "2025-10-01T02:03:17.812Z",
-    "jsonLastUpdate": "2025-10-09T01:48:08.956Z",
+    "lastUpdate": "2025-11-01T02:02:40.751Z",
+    "jsonLastUpdate": "2025-11-02T01:39:36.050Z",
     "license": {
       "name": "CC BY-SA 4.0",
       "content": "© みかぶる (Mikanixonable), かえる (kaeru2193), 人工言語学Wiki上の記事編集者 under CC BY-SA 4.0"
@@ -2763,23 +2763,22 @@
       ]
     },
     {
-      "id": "9CAasjmFke-PNI0-pUE4RcajPj1TvYMFySTWuowWcAw",
+      "id": "N6sDeViZoH5_tHcIBedjMyJr9Gd_qArziXobFGdhUp4",
       "name": [
         "LANDI",
-        "7セグ語",
-        "人工言語ランディ"
+        "ランディ，７セグ語"
       ],
       "kanji": [],
       "desc": [
-        "トキポナにインスパイアされた単語数136のミニマル言語"
+        "わずか136個の単語(すべて1音節)に、簡素で合理的な文字を充てた、簡潔な文法をもつミニマル言語。トキポナ既修者には習得しやすい。"
       ],
       "creator": [
         "清水隆紀(1971-)"
       ],
-      "period": "2021-2023",
+      "period": "2023",
       "site": [
         {
-          "url": "https://ameblo.jp/shimizu-tknr/entry-12787465480.html"
+          "url": "https://drive.google.com/file/d/10S56dmuHniOgCRlEoCP7KwvnBl_7EJTp"
         }
       ],
       "twitter": [
@@ -14055,14 +14054,14 @@
       ]
     },
     {
-      "id": "N-stFJ5CId1ia1tKqviAsx7j4M23U0dHS9Sor8NKEvM",
+      "id": "6OWzBE1BKzrkW__-OeswzuekelLqmAbLnPaHtYb7KEQ",
       "name": [
         "piska"
       ],
-      "kanji": [
+      "kanji": [],
+      "desc": [
         "SOV語順で7つの格がある"
       ],
-      "desc": [],
       "creator": [
         "かん/piska"
       ],
@@ -14080,13 +14079,11 @@
       ]
     },
     {
-      "id": "TY44qC7mXCy0mTaFDlf9K2OeYddFJcncVFOsYNqqr5I",
+      "id": "DZKsx6L3RvoSTPSDdByiqnLz0XuS671XYXtvyE-NYaI",
       "name": [
         "カラニア語"
       ],
-      "kanji": [
-        "表記にキリル文字を用いる"
-      ],
+      "kanji": [],
       "desc": [],
       "creator": [
         "Кумрал Каланд Ⅳ"
