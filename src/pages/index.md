@@ -136,16 +136,15 @@ export type Cotec = {
   "datasize": [785, 17],
   "title": "日本語圏の人工言語の一覧表 Cotec変換済みデータ",
   "author": [
-    "みかぶる (Mikanixonable)",
-    "かえる (kaeru2193)",
-    "人工言語学Wiki上の記事編集者"
+    "Author1",
+    "Author2"
   ],
   "createdDate": "2024-03-09T00:00:00.000Z",
   "lastUpdate": "2025-08-01T02:33:12.782Z",
   "jsonLastUpdate": "2025-08-12T02:36:24.715Z",
   "license": {
     "name": "CC BY-SA 4.0",
-    "content": "© みかぶる (Mikanixonable), かえる (kaeru2193), 人工言語学Wiki上の記事編集者 under CC BY-SA 4.0"
+    "content": "<ライセンス文>"
   },
   "advanced": 0,
   "label": [
