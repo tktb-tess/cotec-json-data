@@ -1,7 +1,7 @@
 {
   "metadata": {
     "datasize": [
-      785,
+      786,
       17
     ],
     "title": "日本語圏の人工言語の一覧表 Cotec変換済みデータ",
@@ -11,8 +11,8 @@
       "人工言語学Wiki上の記事編集者"
     ],
     "createdDate": "2024-03-09T00:00:00.000Z",
-    "lastUpdate": "2025-12-01T02:28:01.892Z",
-    "jsonLastUpdate": "2025-12-01T15:15:18.443Z",
+    "lastUpdate": "2026-01-01T02:27:27.109Z",
+    "jsonLastUpdate": "2026-01-01T15:14:42.144Z",
     "license": {
       "name": "CC BY-SA 4.0",
       "content": "© みかぶる (Mikanixonable), かえる (kaeru2193), 人工言語学Wiki上の記事編集者 under CC BY-SA 4.0"
@@ -19677,6 +19677,26 @@
       ],
       "script": [
         "片仮名"
+      ]
+    },
+    {
+      "id": "ahon7jYlW_SKxWm63JC_MSgXyi9Hedd_R_fQTfvNYzY",
+      "name": [
+        "ヨコガナ"
+      ],
+      "kanji": [],
+      "desc": [
+        "日本語をラテン文字の如く横書きで表記する書記体系"
+      ],
+      "creator": [
+        "橘榛名",
+        "Misskey.io: https://misskey.io/@ta_haruna"
+      ],
+      "period": "2019?",
+      "site": [
+        {
+          "url": "https://c4se.hatenablog.com/entry/2019/08/11/234422"
+        }
       ]
     }
   ]
