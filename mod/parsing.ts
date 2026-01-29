@@ -42,7 +42,7 @@ export const cotecToJSON = async (raw: string) => {
   const advanced = Number.parseInt(rowMeta[7]);
 
   // if (advanced !== 0) {
-  //     /* 何か処理 */;
+  //     /* 何か処理 */
   // }
 
   const label = parsedData[1];
@@ -131,7 +131,7 @@ export const cotecToJSON = async (raw: string) => {
       creator = creator.concat(row[4].split(';').map((datum) => datum.trim()));
     }
 
-    period = row[5] || undefined;
+    period = row[5].trim() || undefined;
 
     // site
     if (row[6]) {

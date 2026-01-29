@@ -1,10 +1,10 @@
 ---
 import '../main.css';
 interface Props {
-  frontmatter: {
+  readonly frontmatter: {
     readonly title: string;
   };
-};
+}
 const { frontmatter } = Astro.props;
 ---
 
@@ -21,19 +21,15 @@ const { frontmatter } = Astro.props;
     <meta name='generator' content={Astro.generator} />
     <title>{frontmatter.title}</title>
   </head>
-  <body class='bg-slate-50 dark:bg-slate-950 flow-root'>
+  <body>
     <header>
-      <h1
-        class='text-center my-12 font-extralight dark:text-white text-4xl xl:text-5xl'
-      >
+      <h1 id='title'>
         {frontmatter.title}
       </h1>
     </header>
-    <div
-      class='prose prose-slate dark:prose-invert prose-sm lg:prose-base w-full max-w-320 mx-auto px-4 prose-a:hover:opacity-60 prose-headings:font-normal'
-    >
+    <main>
       <slot />
       <div class='h-10'></div>
-    </div>
+    </main>
   </body>
 </html>
