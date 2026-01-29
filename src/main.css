@@ -175,4 +175,8 @@
   .astro-code {
     @apply px-3 py-2 rounded my-(--s-heading);
   }
+
+  :is(strong, b) {
+    @apply font-semibold;
+  }
 }
