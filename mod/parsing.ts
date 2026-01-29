@@ -131,7 +131,7 @@ export const cotecToJSON = async (raw: string) => {
       creator = creator.concat(row[4].split(';').map((datum) => datum.trim()));
     }
 
-    period = row[5] || undefined;
+    period = row[5].trim() || undefined;
 
     // site
     if (row[6]) {
