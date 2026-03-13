@@ -1,9 +1,19 @@
 import { isDeepStrictEqual } from 'node:util';
-import type { CotecContent, CotecMetadata, MoyuneClass } from './type';
-import { isMoyune } from './type';
+import type { CotecContent, CotecMetadata, MoyuneClass } from './type.ts';
+import { isMoyune } from './type.ts';
 import { parseCSV, getHash } from '@tktb-tess/util-fns';
 
-const removeDoubling = <T>(arr: readonly T[]) => {
+const strictAt = <T extends {}>(array: readonly T[], index: number) => {
+  const val = array.at(index);
+  if (val == null) {
+    throw RangeError(
+      `array index is out of range\nlength: ${array.length}, index: ${index}`,
+    );
+  }
+  return val;
+};
+
+const removeDoubling = <T extends {}>(arr: readonly T[]) => {
   const arr2: T[] = [];
 
   a: for (let r = 0; r < arr.length; ++r) {
@@ -13,7 +23,8 @@ const removeDoubling = <T>(arr: readonly T[]) => {
         continue a;
       }
     }
-    arr2.push(arr[r]);
+
+    arr2.push(strictAt(arr, r));
   }
 
   return arr2;
@@ -24,29 +35,37 @@ export const cotecToJSON = async (raw: string) => {
   const contents: CotecContent[] = [];
 
   const parsedData = parseCSV(raw);
-  const rowMeta = parsedData[0];
+  const rowMeta = strictAt(parsedData, 0);
 
   console.log('parsing metadata...');
 
   // メタデータ
   const datasize = ((): [number, number] => {
-    const datasize = rowMeta[0].split('x').map((size) => Number.parseInt(size));
-    return [datasize[0], datasize[1]];
+    const datasize = strictAt(rowMeta, 0)
+      .split('x')
+      .map((size) => Number.parseInt(size));
+
+    return [strictAt(datasize, 0), strictAt(datasize, 1)];
   })();
 
-  const title = rowMeta[1];
-  const author = rowMeta[2].split(',').map((str) => str.trim());
-  const createdDate = rowMeta[3];
-  const lastUpdate = rowMeta[4];
-  const license = { name: rowMeta[5], content: rowMeta[6] } as const;
-  const advanced = Number.parseInt(rowMeta[7]);
+  const title = strictAt(rowMeta, 1);
+  const author = strictAt(rowMeta, 2)
+    .split(',')
+    .map((str) => str.trim());
+  const createdDate = strictAt(rowMeta, 3);
+  const lastUpdate = strictAt(rowMeta, 4);
+  const license = {
+    name: strictAt(rowMeta, 5),
+    content: strictAt(rowMeta, 6),
+  } as const;
+  const advanced = Number.parseInt(strictAt(rowMeta, 7)) || 0;
 
   // if (advanced !== 0) {
   //     /* 何か処理 */
   // }
 
-  const label = parsedData[1];
-  const type = parsedData[2];
+  const label = strictAt(parsedData, 1);
+  const type = strictAt(parsedData, 2);
 
   const metadata: CotecMetadata = {
     datasize,
@@ -62,12 +81,11 @@ export const cotecToJSON = async (raw: string) => {
   };
 
   console.log('successfully parsed metadata');
-
   console.log('parsing contents...');
 
   // messier,name,kanji,desc,creator,period,site,twitter,dict,grammar,world,category,moyune,cla,part,example,script
   for (let i = 3; i < parsedData.length - 1; i++) {
-    const row = parsedData[i];
+    const row = strictAt(parsedData, i);
 
     let messier: unknown;
     let name: string[] = [];
@@ -99,6 +117,7 @@ export const cotecToJSON = async (raw: string) => {
     if (row[1]) {
       name = name.concat(row[1].split(';').map((datum) => datum.trim()));
     }
+
     if (row[2]) {
       kanji = kanji.concat(row[2].split(';').map((datum) => datum.trim()));
     }
@@ -131,7 +150,7 @@ export const cotecToJSON = async (raw: string) => {
       creator = creator.concat(row[4].split(';').map((datum) => datum.trim()));
     }
 
-    period = row[5].trim() || undefined;
+    period = row[5]?.trim() || undefined;
 
     // site
     if (row[6]) {
@@ -192,6 +211,10 @@ export const cotecToJSON = async (raw: string) => {
         if (match.groups) {
           const { name, content } = match.groups;
 
+          if (name == null) {
+            throw TypeError('name is nullable', { cause: [row, match.groups] });
+          }
+
           category.push({ name, content: content || undefined });
         }
       }
@@ -208,6 +231,18 @@ export const cotecToJSON = async (raw: string) => {
 
             if (match && match.groups) {
               const { dialect, language, family, creator } = match.groups;
+
+              if (
+                dialect == null ||
+                language == null ||
+                family == null ||
+                creator == null
+              ) {
+                throw TypeError('CLA code is nullable', {
+                  cause: [row, match.groups],
+                });
+              }
+
               clav3 = {
                 dialect,
                 language,
@@ -244,6 +279,17 @@ export const cotecToJSON = async (raw: string) => {
 
       if (match && match.groups) {
         const { dialect, language, family, creator } = match.groups;
+
+        if (
+          dialect == null ||
+          language == null ||
+          family == null ||
+          creator == null
+        ) {
+          throw TypeError('CLA code is nullable', {
+            cause: [row, match.groups],
+          });
+        }
 
         clav3 = {
           dialect,
@@ -321,7 +367,7 @@ export const cotecToJSON = async (raw: string) => {
       return Buffer.from(hash.buffer).toString('base64url');
     })();
 
-    console.log('parsed', name[0]);
+    // console.log('parsed', name[0]);
 
     contents.push({ id, ...pre });
   }
@@ -330,6 +376,5 @@ export const cotecToJSON = async (raw: string) => {
   const contents_ = removeDoubling(contents);
 
   console.log('successfully parsed contents', contents_.length, 'langs');
-  console.log('successfully parsed all');
   return { metadata, contents: contents_ };
 };

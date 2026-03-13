@@ -35,7 +35,7 @@ export const isMoyune = (str: string): str is MoyuneClass => {
   return false;
 };
 
-export type CotecMetadata = {
+export interface CotecMetadata {
   datasize: [number, number];
   title: string;
   author: string[];
@@ -46,9 +46,9 @@ export type CotecMetadata = {
   advanced: number;
   label: string[];
   type: string[];
-};
+}
 
-export type CotecContent = {
+export interface CotecContent {
   id: string;
   messier?: unknown;
   name: string[];
@@ -72,9 +72,9 @@ export type CotecContent = {
   part?: string;
   example?: string[];
   script?: string[];
-};
+}
 
-export type Cotec = {
+export interface Cotec {
   metadata: CotecMetadata;
   contents: CotecContent[];
-};
+}
