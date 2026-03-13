@@ -13,12 +13,29 @@ const { frontmatter } = Astro.props;
   <head>
     <meta charset='utf-8' />
     <meta name='viewport' content='width=device-width,initial-scale=1' />
+    <meta name='color-scheme' content='light dark' />
     <link type='icon' href='/favicon.ico' />
+    <meta name='generator' content={Astro.generator} />
+
+    <!-- fonts -->
+    <link
+      rel='preload'
+      as='font'
+      href='https://api.tktb-tess.dev/fonts/Inter/InterVariable.woff2'
+      crossorigin='anonymous'
+    />
+    <link
+      rel='preload'
+      as='font'
+      href='https://api.tktb-tess.dev/fonts/Inter/InterVariable-Italic.woff2'
+      crossorigin='anonymous'
+    />
+    <!-- font-face -->
     <link
       rel='stylesheet'
       href='https://api.tktb-tess.dev/fonts/Inter/font-face.css'
+      crossorigin='anonymous'
     />
-    <meta name='generator' content={Astro.generator} />
     <title>{frontmatter.title}</title>
   </head>
   <body>
@@ -29,7 +46,6 @@ const { frontmatter } = Astro.props;
     </header>
     <main>
       <slot />
-      <div class='h-10'></div>
     </main>
   </body>
 </html>

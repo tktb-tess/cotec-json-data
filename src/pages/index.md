@@ -53,7 +53,7 @@ type MoyuneClass =
   | 'PUB'
   | 'FIX';
 
-type CotecMetadata = {
+interface CotecMetadata {
   datasize: [number, number];
   title: string;
   author: string[];
@@ -69,7 +69,7 @@ type CotecMetadata = {
   type: string[];
 };
 
-type CotecContent = {
+interface CotecContent {
   id: string;
   messier?: unknown;
   name: string[];
@@ -101,7 +101,7 @@ type CotecContent = {
   script?: string[];
 };
 
-export type Cotec = {
+interface Cotec {
   metadata: CotecMetadata;
   contents: CotecContent[];
 };
