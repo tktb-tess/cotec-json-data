@@ -7,7 +7,7 @@ const strictAt = <T extends {}>(array: readonly T[], index: number) => {
   const val = array.at(index);
   if (val == null) {
     throw RangeError(
-      `array index is out of range\nlength: ${array.length}, index: ${index}`,
+      `accessed to undefined\nlength: ${array.length}, index: ${index}`,
     );
   }
   return val;
@@ -113,7 +113,8 @@ export const cotecToJSON = async (raw: string) => {
     let script: string[] = [];
 
     // messier, name, kanji
-    messier = row[0] || undefined;
+    messier = row[0]?.trim() || undefined;
+
     if (row[1]) {
       name = name.concat(row[1].split(';').map((datum) => datum.trim()));
     }
@@ -301,7 +302,7 @@ export const cotecToJSON = async (raw: string) => {
     }
 
     // part
-    part = row[14] || undefined;
+    part = row[14]?.trim() || undefined;
 
     // example, script
     if (row[15]) {
@@ -359,12 +360,12 @@ export const cotecToJSON = async (raw: string) => {
       part,
       example: example.length > 0 ? example : undefined,
       script: script.length > 0 ? script : undefined,
-    };
+    } satisfies Omit<CotecContent, 'id'>;
 
     const id = await (async () => {
       const json = JSON.stringify(pre);
       const hash = await getHash(json, 'SHA-256');
-      return Buffer.from(hash.buffer).toString('base64url');
+      return Buffer.copyBytesFrom(hash).toString('base64url');
     })();
 
     // console.log('parsed', name[0]);
