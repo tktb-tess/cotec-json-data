@@ -7,7 +7,7 @@ const main = async () => {
   const mode = process.argv.at(2);
 
   if (mode != null && mode !== 'dry' && mode !== 'preserve-old') {
-    throw TypeError('invalid argumant', { cause: mode });
+    throw TypeError(`invalid argumant: ${mode}`);
   }
 
   const ctc = await fetchCotec(mode);
@@ -15,7 +15,12 @@ const main = async () => {
 
   if (mode === 'dry') {
     console.log('dry-run mode:');
-    console.log(ctcJson.contents.map((c) => c.name[0]).join(', '));
+    ctcJson.contents.forEach((l) => {
+      console.log('creator:', l.creator.join(', '));
+      console.log('name:', l.name.join(', '));
+      console.log('description:', l.desc.join(''));
+      console.log('');
+    });
     console.log('all tasks were finished');
     return;
   }

@@ -177,7 +177,10 @@ const parseRow = async (row: readonly string[]): Promise<CotecContent> => {
     for (const match of matches) {
       if (match.groups) {
         const { name, url } = match.groups;
-        if (!url) throw Error('parse error: site.url is empty');
+        if (!url)
+          throw TypeError(
+            `parse error: site.url is empty\nrow: ${row.join(', ')}`,
+          );
         site.push({ name: name || undefined, url });
       }
     }
@@ -226,7 +229,7 @@ const parseRow = async (row: readonly string[]): Promise<CotecContent> => {
         const { name, content } = match.groups;
 
         if (name == null) {
-          throw TypeError('name is nullable', { cause: [row, match.groups] });
+          throw TypeError(`name is nullable\nrow: ${row.join(', ')}`);
         }
 
         category.push({ name, content: content || undefined });
@@ -252,9 +255,7 @@ const parseRow = async (row: readonly string[]): Promise<CotecContent> => {
               family == null ||
               creator == null
             ) {
-              throw TypeError('CLA code is nullable', {
-                cause: [row, match.groups],
-              });
+              throw TypeError(`CLA code is nullable\nrow: ${row.join(', ')}`);
             }
 
             clav3 = {
@@ -300,9 +301,7 @@ const parseRow = async (row: readonly string[]): Promise<CotecContent> => {
         family == null ||
         creator == null
       ) {
-        throw TypeError('CLA code is nullable', {
-          cause: [row, match.groups],
-        });
+        throw TypeError(`CLA code is nullable\nrow: ${row.join(', ')}`);
       }
 
       clav3 = {
@@ -385,52 +384,67 @@ const parseRow = async (row: readonly string[]): Promise<CotecContent> => {
 export const cotecToJSON = async (
   raw: string,
 ): Promise<ReadonlyDeep<Cotec>> => {
-  console.log('start parsing...');
+  try {
+    console.log('start parsing...');
 
-  const parsedData = Papa.parse<string[]>(raw, { header: false }).data;
-  const metaDataRows: string[][] = parsedData.slice(0, 3);
-  const contentRows: string[][] = parsedData.slice(3, -1);
+    const parsedData = Papa.parse<string[]>(raw, { header: false }).data;
+    const metaDataRows: string[][] = parsedData.slice(0, 3);
+    const contentRows: string[][] = parsedData.slice(3, -1);
 
-  console.log('parsing metadata...');
+    console.log('parsing metadata...');
 
-  const metadata = parseMetadata(metaDataRows);
+    const metadata = parseMetadata(metaDataRows);
 
-  console.log('successfully parsed metadata');
-  console.log('parsing contents...');
+    console.log('successfully parsed metadata');
+    console.log('parsing contents...');
 
-  // messier, name, kanji, desc, creator, period, site, twitter, dict, grammar, world, category, moyune, cla, part, example, script
-  const contents = await Promise.all(contentRows.map(parseRow));
-  const sorted = contents.toSorted((a, b) => {
-    const [aCodes, bCodes] = [
-      getCodePoints(strictAt(a.name, 0)),
-      getCodePoints(strictAt(b.name, 0)),
-    ];
+    // messier, name, kanji, desc, creator, period, site, twitter, dict, grammar, world, category, moyune, cla, part, example, script
+    const contents = await Promise.all(contentRows.map(parseRow));
+    const sorted = contents.toSorted((a, b) => {
+      const [aCres, bCres] = [a.creator[0], b.creator[0]];
 
-    const minLen = Math.min(aCodes.length, bCodes.length);
-
-    for (let i = 0; i < minLen; i++) {
-      const [aCode, bCode] = [strictAt(aCodes, i), strictAt(bCodes, i)];
-      if (aCode == null || bCode == null) return 0;
-      if (aCode !== bCode) {
-        return aCode - bCode;
+      if (!aCres && !bCres) {
+        return 0;
+      } else if (!aCres) {
+        return -1;
+      } else if (!bCres) {
+        return 1;
       }
+
+      const [aCodes, bCodes] = [getCodePoints(aCres), getCodePoints(bCres)];
+
+      const minLen = Math.min(aCodes.length, bCodes.length);
+
+      for (let i = 0; i < minLen; i++) {
+        const [aCode, bCode] = [strictAt(aCodes, i), strictAt(bCodes, i)];
+        if (aCode == null || bCode == null) return 0;
+        if (aCode !== bCode) {
+          return aCode - bCode;
+        }
+      }
+
+      if (aCodes.length === bCodes.length) {
+        return 0;
+      }
+
+      return aCodes.length < bCodes.length ? -1 : 1;
+    });
+
+    // 重複を消す
+    const removedDoubling = removeDoubling(sorted);
+
+    if (metadata.datasize[0] !== removedDoubling.length) {
+      metadata.datasize[0] = removedDoubling.length;
     }
 
-    if (aCodes.length === bCodes.length) {
-      return 0;
-    }
+    console.log(
+      'successfully parsed contents',
+      removedDoubling.length,
+      'langs',
+    );
 
-    return aCodes.length < bCodes.length ? -1 : 1;
-  });
-
-  // 重複を消す
-  const removedDoubling = removeDoubling(sorted);
-
-  if (metadata.datasize[0] !== removedDoubling.length) {
-    metadata.datasize[0] = removedDoubling.length;
+    return { metadata, contents: removedDoubling };
+  } catch (e) {
+    throw Error('an error occured in cotecToJSON', { cause: e });
   }
-
-  console.log('successfully parsed contents', removedDoubling.length, 'langs');
-
-  return { metadata, contents: removedDoubling };
 };
