@@ -3,7 +3,7 @@ import { url, samplePath } from './const.ts';
 
 const controller = new AbortController();
 
-export const fetchCotec = async (mode?: 'dry') => {
+export const fetchCotec = async (mode?: 'dry' | 'preserve-old') => {
   if (mode === 'dry') {
     return readFile(samplePath, { encoding: 'utf-8' });
   }

@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "update-json": "node mod/index.ts",
+    "preserve-old": "node mod/index.ts preserve-old",
     "dry-run": "node mod/index.ts dry",
     "dev": "astro dev",
     "build": "astro build",

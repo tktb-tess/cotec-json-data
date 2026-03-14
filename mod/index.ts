@@ -8,7 +8,7 @@ import { filePath, filePathOld } from './const.ts';
 const main = async () => {
   const mode = process.argv.at(2);
 
-  if (mode != null && mode !== 'dry') {
+  if (mode != null && mode !== 'dry' && mode !== 'preserve-old') {
     throw TypeError('invalid argumant', { cause: mode });
   }
 
@@ -16,7 +16,7 @@ const main = async () => {
   const ctcJson: ReadonlyDeep<Cotec> = await cotecToJSON(ctc);
 
   if (mode === 'dry') {
-    console.log('dry run');
+    console.log('dry-run mode:');
     console.log(ctcJson.contents.map((c) => c.name[0]).join(', '));
     console.log('all tasks were finished');
     return;
@@ -25,13 +25,17 @@ const main = async () => {
   const json = JSON.stringify(ctcJson, null, 2);
   await mkdir('./public/out', { recursive: true });
 
-  await readFile(filePath, { encoding: 'utf-8' }).then(
-    async (old) => {
-      console.log(`copying from ${filePath} to ${filePathOld}...`);
-      await writeFile(filePathOld, old);
-    },
-    () => console.log(`no previous version. skipped`),
-  );
+  if (mode === 'preserve-old') {
+    console.log(`preserve-old mode: skip to copy previous json`);
+  } else {
+    await readFile(filePath, { encoding: 'utf-8' }).then(
+      async (old) => {
+        console.log(`copying from ${filePath} to ${filePathOld}...`);
+        await writeFile(filePathOld, old);
+      },
+      () => console.log(`previous json doesn't exist. skipped`),
+    );
+  }
 
   console.log(`writing to ${filePath}...`);
   await writeFile(filePath, json);
