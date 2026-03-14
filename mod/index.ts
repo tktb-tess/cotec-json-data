@@ -1,8 +1,6 @@
 import { fetchCotec } from './fetch.ts';
 import { cotecToJSON } from './parsing.ts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import type { Cotec } from './type.ts';
-import type { ReadonlyDeep } from 'type-fest';
 import { filePath, filePathOld } from './const.ts';
 
 const main = async () => {
@@ -13,7 +11,7 @@ const main = async () => {
   }
 
   const ctc = await fetchCotec(mode);
-  const ctcJson: ReadonlyDeep<Cotec> = await cotecToJSON(ctc);
+  const ctcJson = await cotecToJSON(ctc);
 
   if (mode === 'dry') {
     console.log('dry-run mode:');
