@@ -11,26 +11,22 @@
     "build": "astro build",
     "preview": "astro preview",
     "build-preview": "astro build && astro preview",
-    "astro": "astro",
-    "delete": "rm -f public/out/conlinguistics-wiki-list-cotec.json && rm -f public/out/conlinguistics-wiki-list-cotec-old.json"
-  },
-  "dependencies": {
-    "@tailwindcss/vite": "^4.2.1",
-    "@tktb-tess/util-fns": "^0.11.3",
-    "@types/node": "^25.4.0",
-    "astro": "^5.18.1",
-    "tailwindcss": "^4.2.1",
-    "typescript": "^5.9.3"
+    "astro": "astro"
   },
   "packageManager": "pnpm@10.32.1",
   "volta": {
     "node": "24.13.0"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.2.1",
+    "@types/node": "^25.4.0",
     "@types/papaparse": "^5.5.2",
+    "astro": "^5.18.1",
     "happy-dom": "^20.8.3",
     "papaparse": "^5.5.3",
     "remark-toc": "^9.0.0",
-    "type-fest": "^5.4.4"
+    "tailwindcss": "^4.2.1",
+    "type-fest": "^5.4.4",
+    "typescript": "^5.9.3"
   }
 }

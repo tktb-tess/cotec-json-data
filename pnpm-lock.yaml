@@ -13,29 +13,19 @@ overrides:
 importers:
 
   .:
-    dependencies:
+    devDependencies:
       '@tailwindcss/vite':
         specifier: ^4.2.1
         version: 4.2.1(vite@6.4.1(@types/node@25.4.0)(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.21.0))
-      '@tktb-tess/util-fns':
-        specifier: ^0.11.3
-        version: 0.11.3
       '@types/node':
         specifier: ^25.4.0
         version: 25.4.0
-      astro:
-        specifier: ^5.18.1
-        version: 5.18.1(@types/node@25.4.0)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(tsx@4.21.0)(typescript@5.9.3)
-      tailwindcss:
-        specifier: ^4.2.1
-        version: 4.2.1
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
-    devDependencies:
       '@types/papaparse':
         specifier: ^5.5.2
         version: 5.5.2
+      astro:
+        specifier: ^5.18.1
+        version: 5.18.1(@types/node@25.4.0)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(tsx@4.21.0)(typescript@5.9.3)
       happy-dom:
         specifier: ^20.8.3
         version: 20.8.3
@@ -45,9 +35,15 @@ importers:
       remark-toc:
         specifier: ^9.0.0
         version: 9.0.0
+      tailwindcss:
+        specifier: ^4.2.1
+        version: 4.2.1
       type-fest:
         specifier: ^5.4.4
         version: 5.4.4
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
 packages:
 
@@ -837,10 +833,6 @@ packages:
     resolution: {integrity: sha512-TBf2sJjYeb28jD2U/OhwdW0bbOsxkWPwQ7SrqGf9sVcoYwZj7rkXljroBO9wKBut9XnmQLXanuDUeqQK0lGg/w==}
     peerDependencies:
       vite: ^5.2.0 || ^6 || ^7
-
-  '@tktb-tess/util-fns@0.11.3':
-    resolution: {integrity: sha512-rxVO3/Wv116IyOJ45kjrFvOhWsA2esHakqZZQaYwDkAK5y0p1IkXuk7vdNZBuuZIjQPCILfmbCVpCJLzZGDblQ==}
-    engines: {node: '>=22', pnpm: '>=10'}
 
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
@@ -2509,8 +2501,6 @@ snapshots:
       '@tailwindcss/oxide': 4.2.1
       tailwindcss: 4.2.1
       vite: 6.4.1(@types/node@25.4.0)(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.21.0)
-
-  '@tktb-tess/util-fns@0.11.3': {}
 
   '@types/debug@4.1.12':
     dependencies:

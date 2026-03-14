@@ -11,12 +11,10 @@
   --font-ipa: var(--font-serif);
 
   --color-violet-dark: oklch(from var(--color-violet-950) 20% 0.06 h);
-  --color-side: var(--color-violet-50);
+  --color-side: var(--color-violet-100);
   --color-d-side: var(--color-violet-950);
-  --color-main: #fff;
-  --color-d-main: var(--color-violet-dark);
-  --color-text: #000;
-  --color-d-text: #fff;
+  --color-main: canvas;
+  --color-text: canvasText;
   --color-border: var(--color-slate-400);
   --color-d-border: var(--color-slate-500);
   --color-border-2: var(--color-slate-500);
@@ -102,7 +100,7 @@
   }
 
   body {
-    @apply max-lg:flow-root lg:grid cbg-side ctext-text;
+    @apply max-lg:flow-root lg:grid cbg-side text-text;
     grid-template-areas:
       'h h h'
       '. m .'
@@ -127,7 +125,7 @@
   }
 
   main {
-    @apply px-4 pb-36 cbg-main min-h-lvh;
+    @apply px-4 pb-36 bg-main min-h-lvh;
     grid-area: m;
   }
 
@@ -136,7 +134,7 @@
   }
 
   h1 {
-    @apply text-4xl font-extralight text-balance my-10 text-center;
+    @apply text-5xl font-extralight text-balance my-12 text-center;
   }
 
   h2,
