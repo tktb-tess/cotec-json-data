@@ -46,10 +46,8 @@ const removeDoubling = <T extends {}>(arr: readonly T[]) => {
   return arr2;
 };
 
-const parseMetadata = (
-  parsedData: ReadonlyDeep<string[][]>,
-): ReadonlyDeep<CotecMetadata> => {
-  const rowMeta = strictAt(parsedData, 0);
+const parseMetadata = (metadataRows: string[][]): CotecMetadata => {
+  const rowMeta = strictAt(metadataRows, 0);
   // メタデータ
   const datasize = ((): [number, number] => {
     const datasize = strictAt(rowMeta, 0)
@@ -75,8 +73,8 @@ const parseMetadata = (
   //     /* 何か処理 */
   // }
 
-  const label = strictAt(parsedData, 1);
-  const type = strictAt(parsedData, 2);
+  const label = strictAt(metadataRows, 1);
+  const type = strictAt(metadataRows, 2);
 
   return {
     datasize,
@@ -101,9 +99,7 @@ const getId = async (content: Omit<CotecContent, 'id'>) => {
   return Buffer.from(hash).toString('base64url');
 };
 
-const parseRow = async (
-  row: readonly string[],
-): Promise<ReadonlyDeep<CotecContent>> => {
+const parseRow = async (row: readonly string[]): Promise<CotecContent> => {
   let messier: unknown;
   let name: string[] = [];
   let kanji: string[] = [];
@@ -392,8 +388,8 @@ export const cotecToJSON = async (
   console.log('start parsing...');
 
   const parsedData = Papa.parse<string[]>(raw, { header: false }).data;
-  const metaDataRows: ReadonlyDeep<string[][]> = parsedData.slice(0, 3);
-  const contentRows: ReadonlyDeep<string[][]> = parsedData.slice(3, -1);
+  const metaDataRows: string[][] = parsedData.slice(0, 3);
+  const contentRows: string[][] = parsedData.slice(3, -1);
 
   console.log('parsing metadata...');
 
@@ -430,6 +426,11 @@ export const cotecToJSON = async (
   // 重複を消す
   const removedDoubling = removeDoubling(sorted);
 
+  if (metadata.datasize[0] !== removedDoubling.length) {
+    metadata.datasize[0] = removedDoubling.length;
+  }
+
   console.log('successfully parsed contents', removedDoubling.length, 'langs');
+
   return { metadata, contents: removedDoubling };
 };
