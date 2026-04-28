@@ -30,7 +30,7 @@ const getCodePoints = (str: string) => {
 };
 
 const removeDoubling = <T extends {}>(arr: readonly T[]) => {
-  const arr2: T[] = [];
+  const result: T[] = [];
 
   a: for (let r = 0; r < arr.length; ++r) {
     for (let l = 0; l < r; ++l) {
@@ -40,10 +40,10 @@ const removeDoubling = <T extends {}>(arr: readonly T[]) => {
       }
     }
 
-    arr2.push(strictAt(arr, r));
+    result.push(strictAt(arr, r));
   }
 
-  return arr2;
+  return result;
 };
 
 const parseMetadata = (metadataRows: string[][]): CotecMetadata => {
@@ -67,6 +67,7 @@ const parseMetadata = (metadataRows: string[][]): CotecMetadata => {
     name: strictAt(rowMeta, 5),
     content: strictAt(rowMeta, 6),
   } as const;
+
   const advanced = Number.parseInt(strictAt(rowMeta, 7)) || 0;
 
   // if (advanced !== 0) {
@@ -146,10 +147,10 @@ const parseRow = async (row: readonly string[]): Promise<CotecContent> => {
 
     for (const dsc of descs) {
       desc.push(dsc);
-      const matchurls = dsc.match(regexurl);
+      const matchurls = dsc.matchAll(regexurl);
 
       if (matchurls) {
-        const urlarray = Array.from(matchurls);
+        const urlarray = Array.from(matchurls, (m) => m[0]);
 
         urlarray.forEach((url) => {
           const res = { url };
@@ -270,7 +271,10 @@ const parseRow = async (row: readonly string[]): Promise<CotecContent> => {
       }
       case 'モユネ分類': {
         if (elem.content) {
-          const parsed = Array.from(elem.content.match(/[A-Z]{3}/g) ?? []);
+          const parsed = Array.from(
+            elem.content.matchAll(/[A-Z]{3}/g),
+            (r) => r[0],
+          );
           moyune = moyune.concat(parsed.filter((m) => isMoyune(m)));
         }
         break;
@@ -282,7 +286,7 @@ const parseRow = async (row: readonly string[]): Promise<CotecContent> => {
 
   // moyune
   if (row[12]) {
-    const parsed = Array.from(row[12].match(/[A-Z]{3}/g) ?? []);
+    const parsed = Array.from(row[12].matchAll(/[A-Z]{3}/g), (r) => r[0]);
     moyune = moyune.concat(parsed.filter((m) => isMoyune(m)));
   }
 
