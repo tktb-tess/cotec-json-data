@@ -26,14 +26,14 @@
 
   --default-transition-duration: 110ms;
 
-  /* case-alt, alt-1, l-with-tail, I-with-serif, G-with-spur, alt-eszet, round-quotes-commas */
+  /* contextual-alt, alt-1, l-with-tail, I-with-serif, G-with-spur, alt-eszet, round-quotes-commas */
   --default-font-feature-settings:
-    'case', 'cv01', 'cv05', 'cv08', 'cv10', 'cv07', 'ss03';
+    'calt', 'cv01', 'cv05', 'cv08', 'cv10', 'cv07', 'ss03';
 
   --spacing-paragraph: 0.75rem;
   --spacing-heading: 2.5rem;
   --spacing-figure: 2rem;
-  --spacing-min-side: 16rem;
+  --spacing-min-side: 14rem;
   --spacing-max-main: 72rem;
 }
 
