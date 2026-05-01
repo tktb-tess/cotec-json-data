@@ -1,7 +1,7 @@
 {
   "metadata": {
     "datasize": [
-      785,
+      787,
       17
     ],
     "title": "日本語圏の人工言語の一覧表 Cotec変換済みデータ",
@@ -11,8 +11,8 @@
       "人工言語学Wiki上の記事編集者"
     ],
     "createdDate": "2024-03-09T00:00:00.000Z",
-    "lastUpdate": "2026-03-01T02:56:04.325Z",
-    "jsonLastUpdate": "2026-03-14T09:32:25.808Z",
+    "lastUpdate": "2026-04-01T03:28:44.769Z",
+    "jsonLastUpdate": "2026-04-01T16:02:52.873Z",
     "license": {
       "name": "CC BY-SA 4.0",
       "content": "© みかぶる (Mikanixonable), かえる (kaeru2193), 人工言語学Wiki上の記事編集者 under CC BY-SA 4.0"
@@ -3798,6 +3798,34 @@
       ]
     },
     {
+      "id": "AORBjuifg2uG6RBpUH6XG7XLjOSjhf3cO0hut6MV1HA",
+      "name": [
+        "海語",
+        "Kaisuei Gul"
+      ],
+      "kanji": [],
+      "desc": [
+        "クッキー☆解説Wikiで言及されている人工言語の一つ。人工言語単独が記事になっている唯一で事例である。海語の詳細はよくわからないが、クッキー☆解説Wikiに一部の単語と文法が書かれている。Marciaは、幽閉サテライトのボーカル兼作詞家であり、現在は活動していない。Marciaは、オーストリア出身という設定であるが、Marciaの中の人である一咲 美葵は、日本人であると思われる。",
+        "クッキー☆解説Wiki: https://w.atwiki.jp/cookie_kaisetu/pages/3858.html"
+      ],
+      "creator": [
+        "Marcia"
+      ],
+      "period": "不明",
+      "site": [
+        {
+          "url": "https://w.atwiki.jp/cookie_kaisetu/pages/3858.html"
+        }
+      ],
+      "twitter": [
+        "https://twitter.com/MarciaVtuber"
+      ],
+      "world": [
+        "なし",
+        "(マーシャ王国の公用語)"
+      ]
+    },
+    {
       "id": "518lGkkmcIHSfPzxieH0lV8XdMAKmAe3m5NlyBGP8wA",
       "name": [
         "シネス語"
@@ -4407,215 +4435,6 @@
           "name": "芸術言語"
         }
       ]
-    },
-    {
-      "id": "VEImjHhfNvkwOMTJhOIsSGwa2QxH_xFpyMh0u8boAIs",
-      "name": [
-        "アライア語"
-      ],
-      "kanji": [],
-      "desc": [
-        "コバルディアのボウニミア西部にあるアライア島で話されている設定の言語。"
-      ],
-      "creator": [
-        "Sater-Araia Maju Taz-Boh Akiste",
-        "タツ"
-      ],
-      "period": "2020-",
-      "site": [
-        {
-          "url": "https://tanuki.iml.menhera.org/wiki/%E3%83%9C%E3%82%A6%E3%83%8B%E3%83%9F%E3%82%A2%E9%80%A3%E9%82%A6"
-        }
-      ],
-      "twitter": [
-        "https://twitter.com/Akiste_taz_boh"
-      ],
-      "world": [
-        "コバルディア"
-      ]
-    },
-    {
-      "id": "bMLHbmgk5z6Lwm-KXQz99q6ALHpCesGsKXwfIBW8yOI",
-      "name": [
-        "ボウニゲン語"
-      ],
-      "kanji": [],
-      "desc": [
-        "ボウニミア東部で話されている設定の言語。"
-      ],
-      "creator": [
-        "Sater-Araia Maju Taz-Boh Akiste",
-        "タツ"
-      ],
-      "period": "2022-2023",
-      "site": [
-        {
-          "url": "https://tanuki.iml.menhera.org/wiki/%E3%83%9C%E3%82%A6%E3%83%8B%E3%83%9F%E3%82%A2%E9%80%A3%E9%82%A6"
-        }
-      ],
-      "twitter": [
-        "https://twitter.com/Akiste_taz_boh"
-      ],
-      "world": [
-        "コバルディア"
-      ]
-    },
-    {
-      "id": "XTEZMqnknBNOdE7i5kJezpBpTPLU7IcmOKhFeA6inwM",
-      "name": [
-        "サムワジア語"
-      ],
-      "kanji": [],
-      "desc": [],
-      "creator": [
-        "Sater-Araia Maju Taz-Boh Akiste",
-        "タツ"
-      ],
-      "period": "2022-",
-      "site": [
-        {
-          "url": "https://tanuki.iml.menhera.org/wiki/%E3%83%9C%E3%82%A6%E3%83%8B%E3%83%9F%E3%82%A2%3D%E3%82%B5%E3%83%A0%E3%83%AF%E3%82%B8%E3%82%A2%E8%AA%9E%E6%97%8F"
-        }
-      ],
-      "twitter": [
-        "https://twitter.com/Akiste_taz_boh"
-      ],
-      "dict": [
-        "http://zpdic.ziphil.com/dictionary/1612"
-      ],
-      "world": [
-        "コバルディア"
-      ],
-      "category": [
-        {
-          "name": "架空言語"
-        },
-        {
-          "name": "アポステリオリ言語"
-        }
-      ],
-      "clav3": {
-        "dialect": "~",
-        "language": "sm",
-        "family": "bms",
-        "creator": "smt"
-      }
-    },
-    {
-      "id": "SJerdtLi8a_5yDqzC0yihFtU8VesYrKmNcdAopLo778",
-      "name": [
-        "バカ語"
-      ],
-      "kanji": [],
-      "desc": [
-        "古代にボウニミアで話されていた言語。"
-      ],
-      "creator": [
-        "Sater-Araia Maju Taz-Boh Akiste",
-        "タツ"
-      ],
-      "period": "2023",
-      "site": [
-        {
-          "url": "https://tanuki.iml.menhera.org/wiki/%E3%83%9C%E3%82%A6%E3%83%8B%E3%83%9F%E3%82%A2%3D%E3%82%B5%E3%83%A0%E3%83%AF%E3%82%B8%E3%82%A2%E8%AA%9E%E6%97%8F"
-        }
-      ],
-      "twitter": [
-        "https://twitter.com/Akiste_taz_boh"
-      ],
-      "world": [
-        "コバルディア"
-      ],
-      "category": [
-        {
-          "name": "架空言語"
-        }
-      ]
-    },
-    {
-      "id": "rc3v9viJZXdaugyx4fUNclW9Zwh5-TjkM0CUybn5Faw",
-      "name": [
-        "フリピア語"
-      ],
-      "kanji": [],
-      "desc": [
-        "コバルディアのサムワジア大半島で、古代に話されていた言語"
-      ],
-      "creator": [
-        "Sater-Araia Maju Taz-Boh Akiste",
-        "タツ"
-      ],
-      "period": "2023",
-      "site": [
-        {
-          "url": "https://tanuki.iml.menhera.org/wiki/%E3%83%9C%E3%82%A6%E3%83%8B%E3%83%9F%E3%82%A2%3D%E3%82%B5%E3%83%A0%E3%83%AF%E3%82%B8%E3%82%A2%E8%AA%9E%E6%97%8F"
-        }
-      ],
-      "twitter": [
-        "https://twitter.com/Akiste_taz_boh"
-      ],
-      "world": [
-        "コバルディア"
-      ],
-      "category": [
-        {
-          "name": "架空言語"
-        }
-      ]
-    },
-    {
-      "id": "6KPegy9gkKFZsjWroK99Q_jjsrnyL8N6L5lNJaBxDJM",
-      "name": [
-        "ボウニム語",
-        "bohnimik"
-      ],
-      "kanji": [],
-      "desc": [
-        "コバルディアにある国「ボウニミア連邦」で話されている自然言語という設定。人工言語であるフィルヴェーユ語や、自然言語である古ノルド語などのヨーロッパの言語の影響があるアポステオリ言語。"
-      ],
-      "creator": [
-        "Sater-Araia Maju Taz-Boh Akiste",
-        "タツ"
-      ],
-      "period": "2016-",
-      "site": [
-        {
-          "url": "https://tanuki.iml.menhera.org/wiki/%E3%83%9C%E3%82%A6%E3%83%8B%E3%83%A0%E8%AA%9E"
-        }
-      ],
-      "twitter": [
-        "https://twitter.com/Akiste_taz_boh"
-      ],
-      "dict": [
-        "https://tanuki.iml.menhera.org/wiki/%E3%83%9C%E3%82%A6%E3%83%8B%E3%83%A0%E8%AA%9E#%E6%96%87%E6%B3%95",
-        "http://twoc.ever.jp/twoc/conlang.cgi?mode=search&user_id=Rine",
-        "http://twoc.ever.jp/twoc/conlang.cgi?mode=search&user_id=bohnimi",
-        "http://zpdic.ziphil.com/dictionary/iximi?mode=name&page=0&search=&type=prefix"
-      ],
-      "world": [
-        "コバルディア"
-      ],
-      "category": [
-        {
-          "name": "芸術言語"
-        },
-        {
-          "name": "架空言語"
-        },
-        {
-          "name": "CLA v1",
-          "content": "bnm-xr"
-        },
-        {
-          "name": "アポステリオリ言語"
-        }
-      ],
-      "clav3": {
-        "dialect": "~",
-        "language": "bm",
-        "family": "bms",
-        "creator": "smt"
-      }
     },
     {
       "id": "ImVJdSTRmnXkN4Ce8dhGw7DX4LuGOCiM8FMY-DYkVhw",
@@ -6590,9 +6409,10 @@
       ]
     },
     {
-      "id": "9dguwJkylwTSURKrYQqLMQAGoxQizzNPYdRrOJiJIHE",
+      "id": "qAOMoJ6Ga8QZkQVjIe86nAAfr5lJRRSAyyzM5YWp4xY",
       "name": [
-        "凪霧"
+        "凪霧",
+        "アルティア語"
       ],
       "kanji": [
         "凪語"
@@ -7395,12 +7215,14 @@
       ]
     },
     {
-      "id": "ViQqazuIgTryqXqAMNhIuK8wYZJK4KW2zzeB-CjcDSU",
+      "id": "MZqiXjcBQq6r_6PiC-Ag4pDxiBIOMVjSQMcANDb_F-k",
       "name": [
-        "アルティア語"
+        "アルティア語 異称:アルティア方言"
       ],
       "kanji": [],
-      "desc": [],
+      "desc": [
+        "おそらく、凪霧と違う言語だと思われる。"
+      ],
       "creator": [
         "seren arbazard(1981-)",
         "セレン・アルバザード",
@@ -9650,6 +9472,208 @@
       "twitter": [
         "https://twitter.com/sanasuno"
       ]
+    },
+    {
+      "id": "7BKwWERP-nQL28rLWntknbjro7vpbtQbDZeA-knNC2o",
+      "name": [
+        "アライア語"
+      ],
+      "kanji": [],
+      "desc": [
+        "コバルディアのボウニミア西部にあるアライア島で話されている設定の言語。"
+      ],
+      "creator": [
+        "さらいまゆ"
+      ],
+      "period": "2020-",
+      "site": [
+        {
+          "url": "https://tanukipedia.miraheze.org/wiki/%E3%83%9C%E3%82%A6%E3%83%8B%E3%83%9F%E3%82%A2%E9%80%A3%E9%82%A6"
+        }
+      ],
+      "twitter": [
+        "https://twitter.com/Maju_tabakst"
+      ],
+      "world": [
+        "コバルディア"
+      ]
+    },
+    {
+      "id": "zZZt2-SYbt0Mgro11TlF9E_kaaz7hMJdnW7BIdEI2Zc",
+      "name": [
+        "ボウニゲン語"
+      ],
+      "kanji": [],
+      "desc": [
+        "ボウニミア東部で話されている設定の言語。"
+      ],
+      "creator": [
+        "さらいまゆ"
+      ],
+      "period": "2022-2023",
+      "site": [
+        {
+          "url": "https://tanukipedia.miraheze.org/wiki/%E3%83%9C%E3%82%A6%E3%83%8B%E3%83%9F%E3%82%A2%E9%80%A3%E9%82%A6"
+        }
+      ],
+      "twitter": [
+        "https://twitter.com/Maju_tabakst"
+      ],
+      "world": [
+        "コバルディア"
+      ]
+    },
+    {
+      "id": "6OC5uBIQGIHCXvFRMeReZfGb9okbr2iuQpy_u6wrq1U",
+      "name": [
+        "サムワジア語"
+      ],
+      "kanji": [],
+      "desc": [],
+      "creator": [
+        "さらいまゆ"
+      ],
+      "period": "2022-",
+      "site": [
+        {
+          "url": "https://tanukipedia.miraheze.org/wiki/%E3%83%9C%E3%82%A6%E3%83%8B%E3%83%9F%E3%82%A2%3D%E3%82%B5%E3%83%A0%E3%83%AF%E3%82%B8%E3%82%A2%E8%AA%9E%E6%97%8F"
+        }
+      ],
+      "twitter": [
+        "https://twitter.com/Maju_tabakst"
+      ],
+      "dict": [
+        "http://zpdic.ziphil.com/dictionary/1612"
+      ],
+      "world": [
+        "コバルディア"
+      ],
+      "category": [
+        {
+          "name": "架空言語"
+        },
+        {
+          "name": "アポステリオリ言語"
+        }
+      ],
+      "clav3": {
+        "dialect": "~",
+        "language": "sm",
+        "family": "bms",
+        "creator": "smt"
+      }
+    },
+    {
+      "id": "z1_UE17comLRbK0UMnBIONiwczeybI4qm3PiPvdbJ0g",
+      "name": [
+        "バカ語"
+      ],
+      "kanji": [],
+      "desc": [
+        "古代にボウニミアで話されていた言語。"
+      ],
+      "creator": [
+        "さらいまゆ"
+      ],
+      "period": "2023",
+      "site": [
+        {
+          "url": "https://tanukipedia.miraheze.org/wiki/%E3%83%9C%E3%82%A6%E3%83%8B%E3%83%9F%E3%82%A2%3D%E3%82%B5%E3%83%A0%E3%83%AF%E3%82%B8%E3%82%A2%E8%AA%9E%E6%97%8F"
+        }
+      ],
+      "twitter": [
+        "https://twitter.com/Maju_tabakst"
+      ],
+      "world": [
+        "コバルディア"
+      ],
+      "category": [
+        {
+          "name": "架空言語"
+        }
+      ]
+    },
+    {
+      "id": "KSliu9C15CB1q_cHOZ8nb5usPcfFqvomZg7DhXapMKU",
+      "name": [
+        "フリピア語"
+      ],
+      "kanji": [],
+      "desc": [
+        "コバルディアのサムワジア大半島で、古代に話されていた言語"
+      ],
+      "creator": [
+        "さらいまゆ"
+      ],
+      "period": "2023",
+      "site": [
+        {
+          "url": "https://tanukipedia.miraheze.org/wiki/%E3%83%9C%E3%82%A6%E3%83%8B%E3%83%9F%E3%82%A2%3D%E3%82%B5%E3%83%A0%E3%83%AF%E3%82%B8%E3%82%A2%E8%AA%9E%E6%97%8F"
+        }
+      ],
+      "twitter": [
+        "https://twitter.com/Maju_tabakst"
+      ],
+      "world": [
+        "コバルディア"
+      ],
+      "category": [
+        {
+          "name": "架空言語"
+        }
+      ]
+    },
+    {
+      "id": "3oDu16Qc4xI96-rCjTwhitbNxvUJPVnmfv9qQJB3KMc",
+      "name": [
+        "ボウニム語"
+      ],
+      "kanji": [],
+      "desc": [
+        "コバルディアにある国「ボウニミア連邦」で話されている自然言語という設定。人工言語であるフィルヴェーユ語や、自然言語である古ノルド語などのヨーロッパの言語の影響があるアポステオリ言語。"
+      ],
+      "creator": [
+        "さらいまゆ"
+      ],
+      "period": "2016-",
+      "site": [
+        {
+          "url": "https://tanukipedia.miraheze.org/wiki/%E3%83%9C%E3%82%A6%E3%83%8B%E3%83%A0%E8%AA%9E"
+        }
+      ],
+      "twitter": [
+        "https://twitter.com/Maju_tabakst"
+      ],
+      "dict": [
+        "https://tanukipedia.miraheze.org/wiki/%E3%83%9C%E3%82%A6%E3%83%8B%E3%83%A0%E8%AA%9E#%E6%96%87%E6%B3%95",
+        "http://twoc.ever.jp/twoc/conlang.cgi?mode=search&user_id=Rine",
+        "http://twoc.ever.jp/twoc/conlang.cgi?mode=search&user_id=bohnimi",
+        "http://zpdic.ziphil.com/dictionary/iximi?mode=name&page=0&search=&type=prefix"
+      ],
+      "world": [
+        "コバルディア"
+      ],
+      "category": [
+        {
+          "name": "芸術言語"
+        },
+        {
+          "name": "架空言語"
+        },
+        {
+          "name": "CLA v1",
+          "content": "bnm-xr"
+        },
+        {
+          "name": "アポステリオリ言語"
+        }
+      ],
+      "clav3": {
+        "dialect": "~",
+        "language": "bm",
+        "family": "bms",
+        "creator": "smt"
+      }
     },
     {
       "id": "g6uEZRXgdwWALOAV28sYMueXp0nLKqWHI9w9MmQADwM",
@@ -12063,6 +12087,32 @@
       "world": [
         "永咲世界",
         "EighluShtania"
+      ]
+    },
+    {
+      "id": "tmFV1iulV_78yPcT-k7GY_g1lzH5wFK1gKpmbLFq2ZU",
+      "name": [
+        "ルマヤ語"
+      ],
+      "kanji": [],
+      "desc": [
+        "エグジットは、クッキー☆界隈の人物としても知られている。星の光とささやかれた秘密から織り成され、現実そのものを曲げることができるという設定の魔法使いの言語である。",
+        "カクヨム: https://kakuyomu.jp/works/1177354054887928655"
+      ],
+      "creator": [
+        "エグジット"
+      ],
+      "period": "2018年-",
+      "site": [
+        {
+          "url": "https://kakuyomu.jp/works/1177354054887928655"
+        }
+      ],
+      "twitter": [
+        "https://twitter.com/eguzitto"
+      ],
+      "world": [
+        "セイラカ"
       ]
     },
     {
