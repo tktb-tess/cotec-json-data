@@ -1,4 +1,3 @@
-import { isDeepStrictEqual } from 'node:util';
 import type {
   Cotec,
   CotecContent,
@@ -6,45 +5,9 @@ import type {
   MoyuneClass,
 } from './type.ts';
 import { isMoyune } from './type.ts';
+import { strictAt, removeDoubling, getCodePoints, getId } from './funcs.ts';
 import type { ReadonlyDeep } from 'type-fest';
 import Papa from 'papaparse';
-
-const strictAt = <T extends {}>(array: readonly T[], index: number) => {
-  const val = array.at(index);
-  if (val == null) {
-    throw RangeError(
-      `accessed to undefined\nlength: ${array.length}, index: ${index}`,
-    );
-  }
-  return val;
-};
-
-const getCodePoints = (str: string) => {
-  return [...str].map((s) => {
-    const point = s.codePointAt(0);
-    if (point == null) {
-      throw TypeError('codepoint is undefined');
-    }
-    return point;
-  });
-};
-
-const removeDoubling = <T extends {}>(arr: readonly T[]) => {
-  const result: T[] = [];
-
-  a: for (let r = 0; r < arr.length; ++r) {
-    for (let l = 0; l < r; ++l) {
-      if (isDeepStrictEqual(arr[l], arr[r])) {
-        // console.log('equal value detected!:', arr[l], arr[r]);
-        continue a;
-      }
-    }
-
-    result.push(strictAt(arr, r));
-  }
-
-  return result;
-};
 
 const parseMetadata = (metadataRows: string[][]): CotecMetadata => {
   const rowMeta = strictAt(metadataRows, 0);
@@ -89,15 +52,6 @@ const parseMetadata = (metadataRows: string[][]): CotecMetadata => {
     label,
     type,
   };
-};
-
-const encoder = new TextEncoder();
-
-const getId = async (content: Omit<CotecContent, 'id'>) => {
-  const json = JSON.stringify(content);
-  const encoded = encoder.encode(json);
-  const hash = await crypto.subtle.digest('SHA-256', encoded);
-  return Buffer.from(hash).toString('base64url');
 };
 
 const parseRow = async (row: readonly string[]): Promise<CotecContent> => {
@@ -392,8 +346,8 @@ export const cotecToJSON = async (
     console.log('start parsing...');
 
     const parsedData = Papa.parse<string[]>(raw, { header: false }).data;
-    const metaDataRows: string[][] = parsedData.slice(0, 3);
-    const contentRows: string[][] = parsedData.slice(3, -1);
+    const metaDataRows = parsedData.slice(0, 3);
+    const contentRows = parsedData.slice(3, -1);
 
     console.log('parsing metadata...');
 
@@ -421,7 +375,6 @@ export const cotecToJSON = async (
 
       for (let i = 0; i < minLen; i++) {
         const [aCode, bCode] = [strictAt(aCodes, i), strictAt(bCodes, i)];
-        if (aCode == null || bCode == null) return 0;
         if (aCode !== bCode) {
           return aCode - bCode;
         }

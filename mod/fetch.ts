@@ -7,6 +7,7 @@ export const fetchCotec = async (mode?: 'dry' | 'preserve-old') => {
   }
 
   console.log(`start fetching ${url}...`);
+
   const res = await fetch(url, {
     method: 'GET',
     signal: AbortSignal.timeout(20000),

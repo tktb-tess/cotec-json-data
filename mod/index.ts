@@ -16,6 +16,7 @@ const main = async () => {
   if (mode === 'dry') {
     console.log('dry-run mode:');
     ctcJson.contents.forEach((l) => {
+      console.log('id:', l.id);
       console.log('creator:', l.creator.join(', '));
       console.log('name:', l.name.join(', '));
       console.log('description:', l.desc.join(''));
