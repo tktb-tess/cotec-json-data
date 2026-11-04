@@ -75,3 +75,5 @@ export interface Cotec {
   metadata: CotecMetadata;
   contents: CotecContent[];
 }
+
+export type Mode = 'dry' | 'preserve-old';

@@ -1,7 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import { url, samplePath } from './const.ts';
+import type { Mode } from './type.ts';
 
-export async function fetchCotec(mode?: 'dry' | 'preserve-old') {
+export async function fetchCotec(mode?: Mode) {
   if (mode === 'dry') {
     return readFile(samplePath, { encoding: 'utf-8' });
   }
