@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { url, samplePath } from './const.ts';
 
-export const fetchCotec = async (mode?: 'dry' | 'preserve-old') => {
+export async function fetchCotec(mode?: 'dry' | 'preserve-old') {
   if (mode === 'dry') {
     return readFile(samplePath, { encoding: 'utf-8' });
   }
@@ -21,4 +21,4 @@ export const fetchCotec = async (mode?: 'dry' | 'preserve-old') => {
 
   console.log(`successfully fetched ${url}`);
   return res.text();
-};
+}

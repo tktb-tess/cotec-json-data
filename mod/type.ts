@@ -29,10 +29,7 @@ const moyunes = [
 export type MoyuneClass = (typeof moyunes)[number];
 
 export const isMoyune = (str: string): str is MoyuneClass => {
-  for (const moyune of moyunes) {
-    if (moyune === str) return true;
-  }
-  return false;
+  return (moyunes as readonly string[]).includes(str);
 };
 
 export interface CotecMetadata {

@@ -3,7 +3,7 @@ import { cotecToJSON } from './parsing.ts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { filePath, filePathOld } from './const.ts';
 
-const main = async () => {
+async function main() {
   const mode = process.argv.at(2);
 
   if (mode != null && mode !== 'dry' && mode !== 'preserve-old') {
@@ -46,6 +46,6 @@ const main = async () => {
 
   console.log('writing the file was successful');
   console.log('all tasks were finished');
-};
+}
 
 main();

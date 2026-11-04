@@ -9,7 +9,7 @@ import { strictAt, removeDoubling, getCodePoints, getId } from './funcs.ts';
 import type { ReadonlyDeep } from 'type-fest';
 import Papa from 'papaparse';
 
-const parseMetadata = (metadataRows: string[][]): CotecMetadata => {
+function parseMetadata(metadataRows: string[][]): CotecMetadata {
   const rowMeta = strictAt(metadataRows, 0);
   // メタデータ
   const datasize = ((): [number, number] => {
@@ -52,9 +52,9 @@ const parseMetadata = (metadataRows: string[][]): CotecMetadata => {
     label,
     type,
   };
-};
+}
 
-const parseRow = async (row: readonly string[]): Promise<CotecContent> => {
+async function parseRow(row: readonly string[]): Promise<CotecContent> {
   let messier: unknown;
   let name: string[] = [];
   let kanji: string[] = [];
@@ -337,11 +337,9 @@ const parseRow = async (row: readonly string[]): Promise<CotecContent> => {
   // console.log('parsed', name[0]);
 
   return { id, ...pre };
-};
+}
 
-export const cotecToJSON = async (
-  raw: string,
-): Promise<ReadonlyDeep<Cotec>> => {
+export async function cotecToJSON(raw: string): Promise<ReadonlyDeep<Cotec>> {
   try {
     console.log('start parsing...');
 
@@ -404,4 +402,4 @@ export const cotecToJSON = async (
   } catch (e) {
     throw Error('an error occured in cotecToJSON', { cause: e });
   }
-};
+}
