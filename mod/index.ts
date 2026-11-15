@@ -2,6 +2,8 @@ import { fetchCotec } from './fetch.ts';
 import { cotecToJSON } from './parsing.ts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { filePath, filePathOld } from './const.ts';
+import type { Cotec } from './type.ts';
+import type { ReadonlyDeep } from 'type-fest';
 
 async function main() {
   const mode = process.argv.at(2);
@@ -23,7 +25,16 @@ async function main() {
       console.log('');
     });
     console.log('all tasks were finished');
-    return;
+    process.exit();
+  }
+
+  const prev = await readFile(filePath, { encoding: 'utf-8' })
+    .then((j) => JSON.parse(j) as ReadonlyDeep<Cotec>)
+    .catch(() => null);
+
+  if (prev && prev.metadata.lastUpdate === ctcJson.metadata.lastUpdate) {
+    console.log('no update exists. exit');
+    process.exit();
   }
 
   const json = JSON.stringify(ctcJson, null, 2);
@@ -31,14 +42,11 @@ async function main() {
 
   if (mode === 'preserve-old') {
     console.log(`preserve-old mode: skip to copy previous json`);
+  } else if (prev) {
+    console.log(`copying from ${filePath} to ${filePathOld}...`);
+    await writeFile(filePathOld, JSON.stringify(prev));
   } else {
-    await readFile(filePath, { encoding: 'utf-8' }).then(
-      async (old) => {
-        console.log(`copying from ${filePath} to ${filePathOld}...`);
-        await writeFile(filePathOld, old);
-      },
-      () => console.log(`previous json doesn't exist. skipped`),
-    );
+    console.log("previous json doesn't exist");
   }
 
   console.log(`writing to ${filePath}...`);

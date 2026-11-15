@@ -3,6 +3,8 @@
   "compilerOptions": {
     "noUncheckedIndexedAccess": true,
     "erasableSyntaxOnly": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "exactOptionalPropertyTypes": false
   },
   "include": ["**/*.ts", "**/*.astro", ".astro/types.d.ts"],
   "exclude": ["dist"]

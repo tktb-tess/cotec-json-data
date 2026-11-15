@@ -1,6 +1,6 @@
 import { isDeepStrictEqual } from 'node:util';
 
-const strictAt = <T extends {}>(array: readonly T[], index: number) => {
+function strictAt<T extends {}>(array: readonly T[], index: number) {
   if (index < -array.length || index >= array.length) {
     throw RangeError(
       `index is out of range\nlength: ${array.length}, index: ${index}`,
@@ -16,19 +16,19 @@ const strictAt = <T extends {}>(array: readonly T[], index: number) => {
   }
 
   return val;
-};
+}
 
-const getCodePoints = (str: string) => {
+function getCodePoints(str: string) {
   return [...str].map((s) => {
     const point = s.codePointAt(0);
     if (point == null) {
-      throw TypeError('codepoint is undefined');
+      throw TypeError('code point is undefined');
     }
     return point;
   });
-};
+}
 
-const removeDoubling = <T extends {}>(arr: readonly T[]) => {
+function removeDoubling<T extends {}>(arr: readonly T[]) {
   const result: T[] = [];
 
   a: for (let r = 0; r < arr.length; ++r) {
@@ -43,15 +43,15 @@ const removeDoubling = <T extends {}>(arr: readonly T[]) => {
   }
 
   return result;
-};
+}
 
 const encoder = new TextEncoder();
 
-const getId = async (content: unknown) => {
+async function getId(content: unknown) {
   const json = JSON.stringify(content);
   const encoded = encoder.encode(json);
   const hash = await crypto.subtle.digest('SHA-1', encoded);
   return Buffer.from(hash).toString('base64url');
-};
+}
 
 export { getId, removeDoubling, getCodePoints, strictAt };
