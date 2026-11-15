@@ -1,6 +1,10 @@
 name: Build, and Deploy
 
 on:
+  push:
+    branches:
+      - main
+
   # 手動実行
   workflow_dispatch:
 
